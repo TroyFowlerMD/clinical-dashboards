@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IVC Hub — JFK ADATC</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <style>
+    /* Page-specific styles for IVC Hub */
+
+    .ivc-intro {
+      margin-bottom: var(--space-8);
+    }
+
+    .ivc-intro .section-title {
+      margin-bottom: var(--space-2);
+    }
+
+    .ivc-subtitle {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Card icon container — matches landing page */
+    .landing-card-icon-wrap {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--teal-bg);
+      border: 1px solid var(--teal-border);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-4);
+      color: var(--teal);
+    }
+
+    .landing-card-icon-wrap svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Arrow icon in card */
+    .landing-card-arrow svg {
+      width: 16px;
+      height: 16px;
+      transition: transform var(--duration) var(--ease-out);
+    }
+
+    .landing-card:hover .landing-card-arrow svg {
+      transform: translateX(3px);
+    }
+
+    /* Feedback box */
+    .feedback-box { background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-6); margin-top: var(--space-10); }
+    .feedback-box h2 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; color: var(--text); margin-bottom: var(--space-4); }
+    .feedback-form { display: flex; flex-direction: column; gap: var(--space-4); }
+    .feedback-field { display: flex; flex-direction: column; gap: var(--space-2); }
+    .feedback-field label { font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--text); }
+    .feedback-field input, .feedback-field textarea { background-color: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-3); font-size: var(--text-sm); color: var(--text); font-family: var(--font-body); transition: border-color var(--duration) var(--ease-out), box-shadow var(--duration) var(--ease-out); resize: vertical; }
+    .feedback-field input::placeholder, .feedback-field textarea::placeholder { color: var(--text-muted); }
+    .feedback-field input:focus, .feedback-field textarea:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-bg); }
+    .feedback-field textarea { min-height: 100px; }
+    .feedback-submit { display: inline-flex; align-items: center; gap: var(--space-2); background-color: var(--teal); color: var(--bg); font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; padding: var(--space-2) var(--space-5); border-radius: var(--radius-md); border: none; cursor: pointer; align-self: flex-start; transition: background-color var(--duration) var(--ease-out), opacity var(--duration) var(--ease-out); }
+    .feedback-submit:hover { background-color: var(--teal-dim); }
+    .feedback-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .feedback-success { display: none; background-color: var(--teal-bg); border: 1px solid var(--teal-border); color: var(--teal); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); font-size: var(--text-sm); margin-top: var(--space-3); }
+    .feedback-success.visible { display: block; }
+    @media (max-width: 599px) { .feedback-box { padding: var(--space-4); } }
+    @media print { .feedback-box { display: none; } }
+  </style>
+</head>
+<body>
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ============================
+      // 1. Theme Toggle
+      // ============================
+      const html = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+      const iconSun = toggle.querySelector('.icon-sun');
+      const iconMoon = toggle.querySelector('.icon-moon');
+
+      function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          iconSun.style.display = '';
+          iconMoon.style.display = 'none';
+        } else {
+          iconSun.style.display = 'none';
+          iconMoon.style.display = '';
+        }
+      }
+
+      // Detect system preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        setTheme('light');
+      } else {
+        setTheme('dark');
+      }
+
+      toggle.addEventListener('click', function() {
+        const current = html.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      // ============================
+      // 2. Back to Top
+      // ============================
+      const backBtn = document.getElementById('backToTop');
+      let ticking = false;
+
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            if (window.scrollY > 300) {
+              backBtn.classList.add('visible');
+            } else {
+              backBtn.classList.remove('visible');
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      backBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Feedback form — handled by feedback-submit.js
+
+    })();
+  </script>
+  <script src="feedback-submit.js"></script>
+</body>
+</html>

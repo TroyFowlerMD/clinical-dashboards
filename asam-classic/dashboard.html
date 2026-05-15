@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASAM Classic - Clinical Dashboards</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+            --core-bg: #f8f9fa;
+            --extra-bg: #f1f8ff;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        
+        /* Layout */
+        .sidebar { width: 350px; background: var(--primary); color: white; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; }
+        .main-content { flex: 1; padding: 20px; overflow-y: auto; background: #fff; }
+        .output-panel { width: 450px; background: #f4f7f6; border-left: 2px solid #ddd; display: flex; flex-direction: column; }
+        
+        /* Typography */
+        h1, h2, h3 { margin-top: 0; }
+        .section-header { border-bottom: 2px solid var(--accent); margin-bottom: 15px; padding-bottom: 5px; color: var(--primary); }
+        
+        /* Form Elements */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        select, textarea, input[type="text"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .radio-group, .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 5px; font-size: 0.9em; width: 45%; }
+        
+        /* Dimension Panels */
+        .dimension-card { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+        .dimension-title { background: var(--light); padding: 10px 15px; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .dimension-content { padding: 15px; display: none; }
+        .dimension-content.active { display: block; }
+        
+        /* Core vs Extra Styling */
+        .core-section { background: var(--core-bg); padding: 10px; border-radius: 4px; margin-bottom: 10px; border-left: 4px solid var(--accent); }
+        .extra-section { background: var(--extra-bg); padding: 10px; border-radius: 4px; border-left: 4px solid var(--success); }
+        .section-label { font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 8px; font-weight: bold; }
+        
+        /* Output Panel Styling */
+        .output-header { padding: 15px; background: #fff; border-bottom: 1px solid #ddd; }
+        .output-body { flex: 1; padding: 15px; overflow-y: auto; }
+        .output-box { background: white; border: 1px solid #ccc; border-radius: 4px; padding: 10px; margin-bottom: 15px; white-space: pre-wrap; font-family: monospace; font-size: 0.9em; max-height: 300px; overflow-y: auto; }
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-align: center; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-success { background: var(--success); color: white; width: 100%; margin-top: 10px; }
+        
+        /* Utilities */
+        .flex { display: flex; gap: 10px; }
+        .hidden { display: none; }
+        .risk-0 { color: var(--success); }
+        .risk-4 { color: var(--danger); }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>Global Config</h3>
+    <div class="form-group">
+        <label>Level of Care Focus</label>
+        <select id="locFocus">
+            <option value="3.7">3.7 (Medically Monitored Detox/Psych)</option>
+            <option value="3.5">3.5 (Residential Rehab)</option>
+            <option value="both">Both (3.7 then 3.5 Step-down)</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>ASAM Edition</label>
+        <div class="radio-group">
+            <label><input type="radio" name="asamEdition" value="3rd" checked> 3rd (NC Default)</label>
+            <label><input type="radio" name="asamEdition" value="4th"> 4th</label>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label>Output Type</label>
+        <select id="outputType">
+            <option value="both">Both Narrative & P2P</option>
+            <option value="narrative">Chart Narrative Only</option>
+            <option value="p2p">Peer-to-Peer Script Only</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label><input type="checkbox" id="ncMedicaid" checked> NC Medicaid / Tailored Plan Case</label>
+    </div>
+
+    <hr style="width: 100%; border: 0.5px solid #555; margin: 20px 0;">
+    
+    <div id="ncReminders" class="core-section" style="color: #333; font-size: 0.85em;">
+        <strong>NC UM Reminders:</strong>
+        <ul style="padding-left: 20px; margin: 5px 0;">
+            <li>Daily nursing (3.7)</li>
+            <li>24/7 psychiatric availability</li>
+            <li>Functional impairments (ADLs)</li>
+            <li>Person-Centered Plan alignment</li>
+        </ul>
+    </div>
+    
+    <button class="btn btn-success" onclick="generateOutput()">GENERATE TEXT</button>
+</div>
+
+<div class="main-content">
+    <h2 class="section-header">Dimensional Assessment</h2>
+    
+    <!-- Dimension 1 -->
+    <div class="dimension-card">
+        <div class="dimension-title" onclick="toggleDim('dim1')">
+            <span>D1: Intoxication / Withdrawal Risk</span>
+            <span>▼</span>
+        </div>
+        <div id="dim1" class="dimension-content active">
+            <div class="core-section">
+                <div class="section-label">ASAM Core Factors (UM/Necessity)</div>
+                <div class="form-group">
+                    <label>Risk Rating (0-4): <span id="risk1Val">2</span></label>
+                    <input type="range" min="0" max="4" value="2" oninput="document.getElementById('risk1Val').innerText=this.value">
+                </div>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" class="d1-core" value="hx_seizures"> Hx DTs/Seizures</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d1-core" value="current_withdrawal"> Severe current WD</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d1-core" value="poly_substance"> Poly-substance use</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d1-core" value="failed_op_detox"> Failed OP detox</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d1-core" value="preg_withdrawal"> Pregnancy + WD</label>
+                </div>
+                <textarea class="form-group" placeholder="Additional core comments (CIWA scores, etc)..."></textarea>
+            </div>
+            <div class="extra-section">
+                <div class="section-label">Additional Formulation Factors</div>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" class="d1-extra" value="kindling"> Kindling effect</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d1-extra" value="cravings"> Severe cravings</label>
+                </div>
+                <textarea class="form-group" placeholder="Mechanism/Vulnerability notes..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dimension 2 -->
+    <div class="dimension-card">
+        <div class="dimension-title" onclick="toggleDim('dim2')">
+            <span>D2: Biomedical Conditions</span>
+            <span>▼</span>
+        </div>
+        <div id="dim2" class="dimension-content">
+            <div class="core-section">
+                <div class="section-label">ASAM Core Factors</div>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" class="d2-core" value="acute_medical"> Acute medical issue</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d2-core" value="iv_abx"> Requires IV Abx</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d2-core" value="chronic_pain"> Severe chronic pain</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d2-core" value="organ_failure"> End-organ damage</label>
+                </div>
+                <textarea placeholder="Medical monitoring needs..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dimension 3 -->
+    <div class="dimension-card">
+        <div class="dimension-title" onclick="toggleDim('dim3')">
+            <span>D3: Emotional / Behavioral / Cognitive</span>
+            <span>▼</span>
+        </div>
+        <div id="dim3" class="dimension-content">
+            <div class="core-section">
+                <div class="section-label">ASAM Core Factors</div>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" class="d3-core" value="si_hi"> Active SI/HI</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d3-core" value="psychosis"> Severe Psychosis</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d3-core" value="self_care"> ADL impairment</label>
+                    <label class="checkbox-item"><input type="checkbox" class="d3-core" value="trauma"> Acute Trauma Sxs</label>
+                </div>
+                <textarea placeholder="Psychiatric monitoring needs..."></textarea>
+            </div>
+            <div class="extra-section">
+                <div class="section-label">Formulation</div>
+                <textarea placeholder="Internalizing vs Externalizing traits..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simplified D4-D6 for Prototype -->
+    <div class="dimension-card">
+        <div class="dimension-title" onclick="toggleDim('dim456')">
+            <span>D4, D5, D6: Motivation & Environment</span>
+            <span>▼</span>
+        </div>
+        <div id="dim456" class="dimension-content">
+            <div class="core-section">
+                <label>D4: Readiness</label>
+                <select><option>Low/Ambivalent</option><option>Internalized</option></select>
+                <label>D5: Relapse Potential</label>
+                <textarea placeholder="Triggers, cravings, hx of relapse..."></textarea>
+                <label>D6: Environment</label>
+                <textarea placeholder="Homelessness, unsupportive peers..."></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="output-panel">
+    <div class="output-header">
+        <h3>Generated Output</h3>
+        <p style="font-size: 0.8em; color: #666;">Note: No PHI is transmitted. Uses de-identified clinical logic.</p>
+    </div>
+    <div class="output-body">
+        <label>Chart Narrative</label>
+        <div id="narrativeOutput" class="output-box">Text will appear here after clicking "Generate"...</div>
+        
+        <label>Peer-to-Peer Script</label>
+        <div id="p2pOutput" class="output-box">P2P script will appear here...</div>
+        
+        <label>JSON Payload (For LLM Integration)</label>
+        <div id="jsonOutput" class="output-box" style="font-size: 0.7em; background: #eee;">[Payload structure]</div>
+    </div>
+</div>
+
+<script>
+    function toggleDim(id) {
+        const content = document.getElementById(id);
+        content.classList.toggle('active');
+    }
+
+    function generateOutput() {
+        // Mocking the data collection for the prototype
+        const data = {
+            config: {
+                loc: document.getElementById('locFocus').value,
+                asam: document.querySelector('input[name="asamEdition"]:checked').value,
+                nc_medicaid: document.getElementById('ncMedicaid').checked
+            },
+            d1: {
+                risk: document.getElementById('risk1Val').innerText,
+                core: Array.from(document.querySelectorAll('.d1-core:checked')).map(el => el.value),
+                extra: Array.from(document.querySelectorAll('.d1-extra:checked')).map(el => el.value)
+            }
+        };
+
+        // Update JSON Preview
+        document.getElementById('jsonOutput').innerText = JSON.stringify(data, null, 2);
+
+        // Mocking LLM Response
+        document.getElementById('narrativeOutput').innerText = 
+            `Patient meets ASAM 3.7 criteria for medically monitored withdrawal management. 
+` +
+            `D1: Risk ${data.d1.risk}/4. Presence of ${data.d1.core.join(', ') || 'acute withdrawal signs'}. 
+` +
+            `Documentation supports need for 24/7 nursing and psychiatric oversight to prevent ${data.config.loc === '3.7' ? 'seizures/DTs' : 'clinical instability'}.`;
+
+        document.getElementById('p2pOutput').innerText = 
+            `"Hello, this is Dr. Fowler. I am calling regarding a P2P for [Patient Initials]. 
+` +
+            `They are currently at our ASAM 3.7 unit. The medical necessity is driven by a high risk in Dimension 1 (${data.d1.risk}/4) with a history of ${data.d1.core.includes('hx_seizures') ? 'seizures' : 'complicated withdrawal'}. 
+` +
+            `NC Medicaid Policy 8D-4 requires medically monitored detox which we are providing..."`;
+    }
+</script>
+
+</body>
+</html>
