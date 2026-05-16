@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Psychiatry Epic Workflows — JFK ADATC</title>
@@ -559,7 +573,745 @@
   </style>
 </head>
 <body>
-<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="index.html" class="back-btn" aria-label="Back to Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Home
+      </a>
+      <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search workflows…" autocomplete="off">
+        <span class="search-count" id="searchCount"></span>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="page-layout">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="separator" aria-hidden="true">→</span>
+      <span class="current">Psychiatry Epic Workflows</span>
+    </nav>
+
+    <h1 class="section-title">Psychiatry Epic Workflows</h1>
+
+    <!-- ===== ADMISSION ===== -->
+    <div class="workflow-phase" data-searchable>
+      <div class="workflow-phase-header" onclick="togglePhase(this)">
+        <div class="workflow-phase-header-text">
+          <div class="workflow-phase-title">Admission</div>
+          <div class="workflow-phase-subtitle">Admission Activity Tab → Admission Navigator</div>
+        </div>
+        <svg class="workflow-phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="workflow-phase-body">
+        <div class="workflow-phase-body-inner">
+
+          <!-- Priority Note -->
+          <div class="priority-note">
+            <strong>Top priorities:</strong> (1) See/evaluate the patient, (2) Place admission orders, (3) Enter diagnoses. Prioritizing orders and diagnoses allows nursing to expedite the admission process, including their verbal handoff to the receiving unit.
+          </div>
+
+          <!-- Pre-charting -->
+          <div class="wf-category collapsible">
+            <div class="wf-category-header" onclick="toggleCategory(this)">
+              <span>Pre-charting</span>
+              <svg class="wf-category-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="wf-category-body" style="padding: 0 var(--space-3) var(--space-3);">
+              <h4 style="font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--text); margin-bottom: var(--space-2); margin-top: var(--space-3);">Media</h4>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-2);">Chart Review → Media. This is where referral documents can be found (if the patient was not a walk-in). Look for "Referral" or "Ref" in the description column to find the referral document(s).</p>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-3);">This is also where you can check whether consents such as MOUD, Psychotropics (for patients with TD on antipsychotics), and Vivitrol have been completed.</p>
+              <h4 style="font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--text); margin-bottom: var(--space-2); margin-top: var(--space-3);">Notes</h4>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6;">Chart Review → Notes. Here you can see notes from past JFK admissions and some notes from outside facilities that use Epic.</p>
+            </div>
+          </div>
+
+          <!-- Admission Documentation -->
+          <div class="wf-category">
+            <div class="wf-category-header">Admission Documentation</div>
+
+            <div class="wf-item" id="item-problem-list">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Problem List complete">
+                <span class="wf-item-title">Problem List</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Update once evaluation is complete. Mark the principal problem.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-allergies">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Allergies complete">
+                <span class="wf-item-title">Allergies</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Confirm with patient and make necessary additions. Mark as Reviewed.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-consents">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Consents complete">
+                <span class="wf-item-title">Consents</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Complete on admission if the patient is prescribed buprenorphine or methadone. Search <span class="sp" onclick="copySP(this)">"MOUD"</span> (bup, methadone). The Psychotropic Medications Consent (<span class="sp" onclick="copySP(this)">"Psychotropic Medications Consent"</span>) is only required if the patient is on antipsychotic medication AND has abnormal movements.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-pdmp">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark PDMP Status complete">
+                <span class="wf-item-title">PDMP Status</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Review PDMP. Mark as Reviewed.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Screenings and Scales -->
+          <div class="wf-category">
+            <div class="wf-category-header">Screenings and Scales</div>
+            <div class="wf-item" id="item-aims">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark AIMS Examination complete">
+                <span class="wf-item-title">AIMS Examination</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Must be documented for any patient on antipsychotic medication — whether we are continuing it, stopping it, or starting it. Complete the AIMS exam within the Admission activity, under the Screenings and Scales section.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- History -->
+          <div class="wf-category">
+            <div class="wf-category-header">History</div>
+
+            <div class="wf-item" id="item-medsurg-family">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Med/Surg, Family complete">
+                <span class="wf-item-title">Med/Surg, Family</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Review nursing entries. Document Family Psych History.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-psych-history">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Psychiatric History complete">
+                <span class="wf-item-title">Psychiatric History</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Document thoroughly. For patients with extensive treatment histories, it's acceptable to consolidate multiple treatments into a single entry as long as pertinent information is captured.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-substance-use">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Substance Use Details complete">
+                <span class="wf-item-title">Substance Use Details</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Review nursing screening documentation and update as needed. Drug section: make a selection (yes/not currently/never) for "Drug use" and skip subsequent subsections. <strong class="text-red">Class section MUST be completed for Primary, Secondary, and Tertiary substance of choice — this is a Federal requirement.</strong> Complete [Drug] Details for each current and historic substance.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-social-history">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Social History complete">
+                <span class="wf-item-title">Social History</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Complete. Ensure Gender Identity is accurate for gender minorities.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-trauma-history">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Trauma History complete">
+                <span class="wf-item-title">Trauma History</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Record categories of traumas and approximate age. Avoid documenting sensitive details here (reserve those for the evaluation note if clinically appropriate).</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Place Admission Orders -->
+          <div class="wf-category">
+            <div class="wf-category-header">Place Admission Orders</div>
+
+            <div class="wf-item" id="item-reconcile-meds">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Reconcile home meds complete">
+                <span class="wf-item-title">Reconcile home meds</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Every home medication must be addressed: continue, don't continue, or order and hold.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-order-sets">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Order Sets complete">
+                <span class="wf-item-title">Order Sets</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <ul>
+              <li><strong>Admission orders</strong>
+            <p>If primary care hasn't completed the admission order set first:</p>
+                <ul>
+                  <li><strong>ACU:</strong> JFK ADATC Admission - ACU (Anna L Dill,MD - JFK <strong>Pref ACU Admission Order Set</strong>)</li>
+                  <li><strong>ARS:</strong> JFK ADATC Admission - ARS (Anna L Dill,MD - JFK <strong>Pref ARS Admission Order Set</strong>)</li>
+                </ul>
+                <p style="margin-top: var(--space-2);">If the order set doesn't appear by default, search <span class="sp" onclick="copySP(this)">Pref ACU Admission</span> or <span class="sp" onclick="copySP(this)">Pref ARS Admission</span>. Mark it as a favorite so it shows up automatically next time. If other admission order sets are appearing as defaults, right-click them and unmark them as favorites.</p>
+              </li>
+              <li><strong>SUD/Detox orders</strong>
+            <ul>
+                  <li><strong>SUD Monitoring and Treatment Order Set</strong> — contains all detox protocols, MOUD, and MAUD</li>
+            </ul>
+              </li>
+            </ul>
+          </div>
+            </div>
+          </div>
+
+          <!-- Notes and Assessments -->
+          <div class="wf-category">
+            <div class="wf-category-header">Notes and Assessments</div>
+
+            <div class="wf-item" id="item-treatment-plan">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Treatment Plan complete">
+                <span class="wf-item-title">Treatment Plan</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Select Add Care Plan (unless one already exists). Add a plan for each problem requiring active management. IP Substance Use should apply to every patient.</p>
+                <ul>
+                  <li>Add at least one <strong>Long-term goal</strong> — choose from list or use <span class="sp" onclick="copySP(this)">.JFKPSYLTG</span>. End date: "t+365"</li>
+                  <li>Add at least one <strong>Short-term goal</strong> — choose from list or use <span class="sp" onclick="copySP(this)">.JFKPSYSTG</span>. End date: "t+7" (ACU) or "t+14" (ARS)</li>
+                  <li>Add at least one <strong>Intervention</strong> per STG — choose from list or use <span class="sp" onclick="copySP(this)">.JFKPSYINT</span>. Select a measurable frequency (not "as needed"). <strong>ACU frequency: Daily. ARS frequency: Weekly.</strong></li>
+                  <li>Set the effective date 30 days out so the care plan does not expire</li>
+                  <li>Select Plans → Start a New Plan → Multidisciplinary Treatment Plan</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-comp-psych-eval">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Comp Psych Eval complete">
+                <span class="wf-item-title">Comp Psych Eval</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Also accessible via: Notes tab → New Note → Comp Psych Eval. SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKACUADMISSIONPSYCHIATRY</span> or <span class="sp" onclick="copySP(this)">.JFKARSADMISSIONPSYCHIATRY</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Handoff & Hospital Course -->
+          <div class="wf-category">
+            <div class="wf-category-header">Handoff &amp; Hospital Course</div>
+            <div class="wf-item" id="item-handoff-hospital-course">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Handoff and Hospital Course complete">
+                <span class="wf-item-title">Handoff &amp; Hospital Course</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Update Handoff and Hospital Course (both in Sidebar). SmartPhrases: <span class="sp" onclick="copySP(this)">.JFKHANDOFF</span> and <span class="sp" onclick="copySP(this)">.JFKHOSPITALCOURSE</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Admission Pearls -->
+          <div class="warning-banner" style="margin-top: var(--space-5);">
+            <svg class="banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <div class="banner-content">
+              <strong>Admission Pearls</strong>
+              <ul>
+                <li>Orders signed in Admission Orders are held until patient arrives on unit. If a med is needed ASAP in the admissions hall, use the Orders activity or + ADD ORDER button, then notify admissions nursing immediately.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FOLLOW UP ===== -->
+    <div class="workflow-phase" data-searchable>
+      <div class="workflow-phase-header" onclick="togglePhase(this)">
+        <div class="workflow-phase-header-text">
+          <div class="workflow-phase-title">Follow Up</div>
+          <div class="workflow-phase-subtitle">Progress notes and daily documentation</div>
+        </div>
+        <svg class="workflow-phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="workflow-phase-body">
+        <div class="workflow-phase-body-inner">
+
+          <div class="wf-category">
+            <div class="wf-category-header">Progress Note</div>
+
+            <div class="wf-item" id="item-followup-note">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Progress Note complete">
+                <span class="wf-item-title">Progress Note</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Notes tab → New Note → Progress Note. SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKACUPROGRESSNOTEPSYCHIATRY</span> or <span class="sp" onclick="copySP(this)">.JFKARSPROGRESSNOTEPSYCHIATRY</span></p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-followup-handoff">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Handoff and Hospital Course complete">
+                <span class="wf-item-title">Handoff &amp; Hospital Course</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Always update Handoff and Hospital Course (Sidebar). SmartPhrases: <span class="sp" onclick="copySP(this)">.JFKHANDOFF</span> and <span class="sp" onclick="copySP(this)">.JFKHOSPITALCOURSE</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-banner" style="margin-top: var(--space-4);">
+            <svg class="banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <div class="banner-content">
+              <strong>Follow Up Pearls</strong>
+              <ul>
+                <li>Use an existing progress note as your starting template via the copy button. Select the note type first. Verify all information is current before submitting.</li>
+                <li>For the first progress note, reference the Comp Psych Eval when selecting Psychosocial Stressors.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TRANSFER ===== -->
+    <div class="workflow-phase" data-searchable>
+      <div class="workflow-phase-header" onclick="togglePhase(this)">
+        <div class="workflow-phase-header-text">
+          <div class="workflow-phase-title">Transfer</div>
+          <div class="workflow-phase-subtitle">ACU ↔ ARS unit transfers</div>
+        </div>
+        <svg class="workflow-phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="workflow-phase-body">
+        <div class="workflow-phase-body-inner">
+
+          <div class="wf-category">
+            <div class="wf-category-header">Transfer Orders</div>
+
+            <div class="wf-item" id="item-transfer-orders">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Transfer Orders complete">
+                <span class="wf-item-title">Transfer Orders</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p><strong>Transfer tab → Transfer Orders:</strong> Click "Transfer Patient to new unit" order</p>
+                <ul>
+                  <li>Service: ADATC</li>
+                  <li>Level of care: ACU → ARS is residential. For ARS → ACU diversion, select whichever LOC best applies</li>
+                  <li>Review current orders for accuracy. Continue/DC/Modify as indicated</li>
+                  <li>Activity level 3 for ARS; level 1 for ACU</li>
+                  <li>Safety Check for ARS: q60m daytime, q30m nighttime</li>
+                  <li>Order an Inpatient Recreational Therapy Consult. In the comment field, enter "ARS transfer."</li>
+                  <li><strong>No detox protocols, CIWA/COWS, or frequent PRNs for ARS patients.</strong> Exceptions must be confirmed with attending. In these cases, always inform the nurse supervisor and provide a warm handoff (verbal report) to the ARS psych provider.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-transfer-note">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Transfer Note complete">
+                <span class="wf-item-title">Transfer Note</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p><strong>Transfer Note</strong> — Notes tab → New Note → Progress Note. SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKTRANSFERSUMMARY</span></p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-transfer-treatment-plan">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Treatment Plan complete">
+                <span class="wf-item-title">Treatment Plan</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p><strong>Treatment Plan tab → Manage Plan &amp; Document Progress</strong></p>
+                <ul>
+                  <li>→ Document Progress: Update goals (Progressing, Adequate for Transfer, Completed)</li>
+                  <li>→ Manage Plan: Add additional STG + Intervention if needed (ensure at least one of each applies to rehab). Create a new plan (can carry forward the first one) → Plans → Start a New Plan → Multidisciplinary Treatment Plan</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-transfer-handoff">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Handoff complete">
+                <span class="wf-item-title">Handoff</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Update the Handoff to clearly convey upcoming plans, recommendations, and action items.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DISCHARGE ===== -->
+    <div class="workflow-phase" data-searchable>
+      <div class="workflow-phase-header" onclick="togglePhase(this)">
+        <div class="workflow-phase-header-text">
+          <div class="workflow-phase-title">Discharge</div>
+          <div class="workflow-phase-subtitle">Ideally complete everything the day before, except signing the discharge summary</div>
+        </div>
+        <svg class="workflow-phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="workflow-phase-body">
+        <div class="workflow-phase-body-inner">
+
+          <div class="wf-category">
+            <div class="wf-category-header">Discharge Tab</div>
+
+            <div class="wf-item" id="item-cssrs">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark CSSRS complete">
+                <span class="wf-item-title">CSSRS Discharge Screener</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Complete CSSRS Discharge Screener.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-dc-problem-list">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Problem List complete">
+                <span class="wf-item-title">Problem List</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Update Problem List — ensure all SUDs have severity specifiers.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-discharge-orders">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Discharge Orders complete">
+                <span class="wf-item-title">Discharge Orders</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <ul>
+                  <li>Discharge Med Rec (done by primary care, except for unplanned after-hours discharges)</li>
+                  <li>Bridge prescription buprenorphine (when applicable). Moonlighters and trainees do not have eRX privileges and must reach out to the attending or backup provider for this.</li>
+                  <li>Click Discharge Patient order → Select Routine Discharge → Enter anticipated discharge date</li>
+                  <li>Order Sets → Psychiatry Discharge Order Set</li>
+                  <li>Personalize Psychiatry Discharge Instructions (can delete "Monitoring" section if primary care is contributing to the discharge; for after-hours, complete as best you can)</li>
+                  <li>Add "How to Use Naloxone" discharge instructions, if applicable</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-discharge-summary">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Discharge Summary complete">
+                <span class="wf-item-title">Discharge Summary</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Create Note. SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKDISCHARGESUMMARY</span>. Pro tip: reference the psych eval for Psychosocial Stressors, Suicide Risk, and Violence Risk sections. Make updates as applicable.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-category">
+            <div class="wf-category-header">Treatment Plan</div>
+
+            <div class="wf-item" id="item-dc-treatment-plan">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Treatment Plan complete">
+                <span class="wf-item-title">Document Progress &amp; Resolve Plan</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Treatment Plan tab → Document Progress → Resolve Plan. Goal closure guidance:</p>
+                <ul>
+                  <li><strong>"Adequate for Discharge"</strong> — the patient has achieved the goal (e.g., detox complete or symptoms minimal)</li>
+                  <li><strong>"Completed"</strong> — we are no longer managing that goal because they are leaving our care. The treatment episode is complete. This does not imply the goal was fully achieved.</li>
+                  <li>If a patient is leaving with minimal progress and the problem remains tenuous (e.g., leaving against advice at the peak of withdrawal), document a brief note describing the situation. That note type is found in Treatment Plan tab → Summary and Note.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-banner" style="margin-top: var(--space-4);">
+            <svg class="banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <div class="banner-content">
+              <strong>Discharge Pearls</strong>
+              <ul>
+                <li>The discharge summary does not have to be finished before the patient leaves — prioritize orders and patient instructions so the AVS is ready.</li>
+                <li>A pended discharge summary cannot be edited by a new author, but it can be easily copied into a new note.</li>
+                <li>SmartPhrase <span class="sp" onclick="copySP(this)">.EDLABS</span> provides a more condensed and readable labs report than the default options. Feel free to substitute it anywhere in Epic.</li>
+                <li>Nursing executes the discharge order when all workflows are complete. If there's any uncertainty about whether the patient is actually leaving, still place the order and complete the full workflow — the order can be discontinued at any time.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ADMISSION DENIAL ===== -->
+    <div class="workflow-phase" data-searchable>
+      <div class="workflow-phase-header" onclick="togglePhase(this)">
+        <div class="workflow-phase-header-text">
+          <div class="workflow-phase-title">Admission Denial <span class="meta-text">(formerly EMTALA)</span></div>
+          <div class="workflow-phase-subtitle">Patient presents for evaluation but is not admitted</div>
+        </div>
+        <svg class="workflow-phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="workflow-phase-body">
+        <div class="workflow-phase-body-inner">
+          <p><em>This workflow applies to any patient who presents for evaluation but is not admitted for any reason. Nuances vary by reason — if unclear, discuss with your attending or psych backup provider.</em></p>
+
+          <div class="wf-category">
+            <div class="wf-category-header">Steps</div>
+
+            <div class="wf-item" id="item-denial-navigator">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Admission Denial Navigator complete">
+                <span class="wf-item-title">Admission Denial Navigator</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Discharge tab → Admission Denial subtab: Complete basic navigator sections (allergies, SUD history, medical history)</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-denial-note">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Medical Screening Exam note complete">
+                <span class="wf-item-title">Medical Screening Exam Note</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Notes tab → New Note → SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKMEDICALSCREENINGEXAMFOREMTALA</span></p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-denial-consent">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark EMTALA Transfer consent complete">
+                <span class="wf-item-title">EMTALA Transfer Consent</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Consents → search "EMTALA Transfer" → complete consent with the patient</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-category">
+            <div class="wf-category-header">If NOT being transferred for an EMTALA emergency</div>
+
+            <div class="wf-item" id="item-denial-naloxone">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Naloxone nursing communication complete">
+                <span class="wf-item-title">Naloxone (if appropriate)</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Order a Nursing Communication for naloxone (<strong>NOT a prescription</strong> to our pharmacy). Search orders for "Nursing Communication" and add the comment: "Please dispense OTC naloxone rescue kit with patient education"</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-denial-instructions">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Discharge Instructions complete">
+                <span class="wf-item-title">Discharge Instructions</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Discharge tab → Admission Denial → Instructions for AVS → add SmartPhrase: <span class="sp" onclick="copySP(this)">JFKCRISISRESOURCELIST</span>. At the top of that section, include personalized follow-up recommendations.</p>
+                <p><strong>Do NOT place a discharge order</strong> — the patient was never admitted. Nursing removes the patient from the facility in Bed Manager.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== AFTERHOURS ADMISSION ===== -->
+    <div class="workflow-phase" data-searchable>
+      <div class="workflow-phase-header" onclick="togglePhase(this)">
+        <div class="workflow-phase-header-text">
+          <div class="workflow-phase-title">Afterhours Admission</div>
+          <div class="workflow-phase-subtitle">On-call admission workflow</div>
+        </div>
+        <svg class="workflow-phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="workflow-phase-body">
+        <div class="workflow-phase-body-inner">
+
+          <div class="wf-category">
+            <div class="wf-category-header">Steps</div>
+
+            <div class="wf-item" id="item-afterhours-note">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark On-Call Admission Note complete">
+                <span class="wf-item-title">On-Call Admission Note</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Notes tab → New Note → Progress Note → SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKONCALLADMISSION</span></p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-afterhours-orders">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Admission Orders complete">
+                <span class="wf-item-title">Admission Orders</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Admission tab → Admission Navigator → Place admission orders (refer to the standard Admission workflow above)</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SIGNIFICANT EVENT ===== -->
+    <div class="workflow-phase" data-searchable>
+      <div class="workflow-phase-header" onclick="togglePhase(this)">
+        <div class="workflow-phase-header-text">
+          <div class="workflow-phase-title">Significant Event</div>
+          <div class="workflow-phase-subtitle">Events requiring documentation outside of a typical progress note</div>
+        </div>
+        <svg class="workflow-phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="workflow-phase-body">
+        <div class="workflow-phase-body-inner">
+          <p><em>Use this note type for events that require documentation outside of a typical progress note. This note type stands out during chart review and is trackable data in Epic.</em></p>
+
+          <h4>Use for</h4>
+          <ul class="use-list">
+            <li>Significant withdrawal complications (e.g., seizure, DTs) leading to an LOA to Mission</li>
+            <li>LOA to Mission for any reason</li>
+            <li>Patient injury (fall, physical altercation, etc.)</li>
+            <li>Behavioral discharge</li>
+            <li>Problematic behaviors leading to a behavioral treatment team and/or partnership agreement</li>
+          </ul>
+
+          <h4>Do NOT use for</h4>
+          <ul class="do-not-use-list">
+            <li>Routine withdrawal complications (e.g., repeated vomiting episodes, distress intolerance, yelling in room/milieu)</li>
+          </ul>
+
+          <div class="wf-category" style="margin-top: var(--space-4);">
+            <div class="wf-category-header">Steps</div>
+
+            <div class="wf-item" id="item-sig-event-note">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Significant Event note complete">
+                <span class="wf-item-title">Significant Event Note</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Notes tab → New Note → Significant Event → SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKSIGNIFICANTEVENT</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FEEDBACK BOX ===== -->
+    <div class="feedback-box" id="feedbackBox">
+      <h2>Suggestions &amp; Feedback</h2>
+      <form class="feedback-form" id="feedbackForm" onsubmit="submitFeedback(event)">
+        <div class="feedback-field">
+          <label for="feedbackName">Your Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="feedbackName" name="name" placeholder="e.g., Dr. Smith" required>
+        </div>
+        <div class="feedback-field">
+          <label for="feedbackComment">Comment / Suggestion <span aria-hidden="true">*</span></label>
+          <textarea id="feedbackComment" name="comment" placeholder="Share a workflow tip, correction, or suggestion…" required></textarea>
+        </div>
+        <button type="submit" class="feedback-submit" id="feedbackSubmitBtn">Submit</button>
+      </form>
+      <div class="feedback-success" id="feedbackSuccess" role="alert">
+        Thank you — your feedback has been recorded.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>JFK ADATC Clinical Reference · For internal use only · Not a substitute for clinical judgment</p>
+      <p style="margin-top: var(--space-2);">
+        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="18 15 12 9 6 15"/>
     </svg>

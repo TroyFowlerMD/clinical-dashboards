@@ -24,6 +24,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
+import { PerplexityAttribution } from "@/components/PerplexityAttribution";
 import {
   Loader2, Copy, CheckCheck, RotateCcw, ChevronRight,
   ClipboardList, FileText, HelpCircle, Settings, Eye, EyeOff,
@@ -477,6 +478,7 @@ export default function Dashboard() {
           </div>
         </details>
 
+        <PerplexityAttribution />
       </aside>
 
       {/* ── MAIN CONTENT ── */}
