@@ -38,7 +38,16 @@
 3. Update DECISIONS.md if an architectural, workflow, safety, or publishing decision was made.
 4. Run the relevant tests/checks, or explain why they were not run.
 5. Run git status --short and summarize the exact files changed.
-6. Recommend a commit message, but ask before running git commit or git push.
+6. By default, after approved work is complete and relevant checks have passed, commit and push automatically unless Dr. Fowler explicitly says not to push yet. Stop and ask before committing or pushing if the changes are unclear, checks fail, deployment/config/secrets are involved, or the repo appears production-sensitive.
+7. End every shutdown with an explicit "Shutdown Receipt" section. Do not end with a generic "Done" only.
+8. The Shutdown Receipt must visibly report:
+   - WORKLOG.md: updated or not updated, with a one-line summary.
+   - TASKS.md: updated or not updated, with any task status changes.
+   - DECISIONS.md: updated or not updated, with a one-line summary.
+   - Tests/checks: commands run, or why none were run.
+   - Commit: hash and commit message if a commit was made, or "not committed" with the reason.
+   - Push: pushed successfully, failed with reason, or not pushed with the reason.
+   - Final git status: exact final status result.
 
 ## Worklog Entry Format
 Append entries to WORKLOG.md using this shape:
