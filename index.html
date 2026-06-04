@@ -45,10 +45,12 @@ h1{margin:0 0 12px;font-size:clamp(2rem,5vw,3.5rem);line-height:1.02}
 .card.asam-app:hover{border-color:rgba(90,160,214,0.45);background:rgba(90,160,214,0.08)}
 .card.asam-classic:hover{border-color:rgba(208,160,75,0.45);background:rgba(208,160,75,0.08)}
 .card.jfk:hover{border-color:rgba(82,166,163,0.45);background:rgba(82,166,163,0.08)}
+.card.alcohol:hover{border-color:rgba(142,120,214,0.45);background:rgba(142,120,214,0.08)}
 .badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:12px}
 .asam-app .badge{background:rgba(90,160,214,0.14);color:#8ec3ea}
 .asam-classic .badge{background:rgba(208,160,75,0.14);color:#efc27b}
 .jfk .badge{background:rgba(82,166,163,0.14);color:#8ad2cf}
+.alcohol .badge{background:rgba(142,120,214,0.14);color:#b8a8f0}
 .card h2{margin:0 0 8px;font-size:1.25rem}
 .card p{margin:0 0 12px;color:var(--muted);line-height:1.55}
 .meta{display:flex;gap:8px;flex-wrap:wrap}
@@ -71,6 +73,7 @@ h1{margin:0 0 12px;font-size:clamp(2rem,5vw,3.5rem);line-height:1.02}
         <div class="note-list">
           <div class="note"><strong>ASAM Classic</strong><span>Single-page ASAM reference dashboard.</span></div>
           <div class="note"><strong>JFK Dashboard</strong><span>Workflows, protocols, MOUD guidance, and staff reference pages.</span></div>
+          <div class="note"><strong>Alcohol Calculators</strong><span>Standard drink and measured BAL trajectory calculators.</span></div>
         </div>
       </aside>
     </section>
@@ -94,6 +97,16 @@ h1{margin:0 0 12px;font-size:clamp(2rem,5vw,3.5rem);line-height:1.02}
           <span class="pill">Multi-page static site</span>
           <span class="pill">Protocols + workflows</span>
           <span class="pill">MOUD guide</span>
+        </div>
+      </a>
+
+      <a class="card alcohol" href="alcohol-calculators/">
+        <div class="badge">Alcohol Calculators</div>
+        <h2>Clinical Alcohol Calculators</h2>
+        <p>Calculate U.S. standard drinks and estimate BAL decline after a measured lab value.</p>
+        <div class="meta">
+          <span class="pill">Mobile web app</span>
+          <span class="pill">Educational estimates</span>
         </div>
       </a>
     </section>

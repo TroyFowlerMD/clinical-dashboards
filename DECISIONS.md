@@ -27,3 +27,9 @@ Context: A feedback repair attempt initially targeted `feedback.js`, but the HTM
 Decision: Abort the active repo/deployment work and preserve the findings as a follow-up task.
 Rationale: Editing an inactive script would be inert, and Apps Script deployment URL updates required authenticated Google access.
 Consequences: Future feedback work must first confirm the loaded script path, then update endpoint/deployment details before publishing.
+
+### 2026-06-04 - Add Alcohol Calculators As A Separate Static Vite App
+Context: The clinical dashboard hub needed a mobile-first alcohol calculator suite without folding it into the ASAM app or adding a backend.
+Decision: Keep source under `apps/alcohol-calculators/` and build static GitHub Pages output into `alcohol-calculators/`.
+Rationale: This preserves the ASAM app boundary while giving the public static hub a directly deployable calculator URL.
+Consequences: Future calculator edits should happen in `apps/alcohol-calculators/`, followed by `npm run test`, `npm run check`, and `npm run build` from that folder before committing the regenerated `alcohol-calculators/` output.

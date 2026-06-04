@@ -1,0 +1,17 @@
+{
+  "name": "Clinical Alcohol Calculators",
+  "short_name": "Alcohol Calcs",
+  "description": "Educational standard drink and BAL trajectory calculators for clinical documentation.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f7f8",
+  "theme_color": "#0f1720",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -17,6 +17,7 @@
 - [ ] Decide whether `asam-app/` needs a deployable public entry point or should remain excluded from the public Pages clinical hub.
 
 ## Completed (last 30 days)
+- [x] Added the Clinical Alcohol Calculators mobile web app under `apps/alcohol-calculators/` with static Pages output at `alcohol-calculators/`.
 - [x] Consolidated clinical dashboards into `clinical-dashboards` with `asam-app/`, `asam-classic/`, and `jfk/`.
 - [x] Kept the ASAM React/Vite app in its own folder instead of flattening it into the static pages.
 - [x] Restored the JFK landing page structure after a blank-page regression.

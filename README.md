@@ -5,6 +5,8 @@ Consolidated clinical dashboard hub for ASAM documentation tools, JFK workflows,
 ## Current Structure
 
 - `index.html`: root hub for the merged dashboard repo
+- `alcohol-calculators/`: generated static GitHub Pages output for the Clinical Alcohol Calculators app
+- `apps/alcohol-calculators/`: React/Vite/TypeScript source for the Clinical Alcohol Calculators app
 - `asam-app/`: full app migrated from `asam-dashboard`
 - `asam-classic/`: static legacy dashboard migrated from `ASAM-Clinical-Dashboard`
 - `jfk/`: static multi-page dashboard migrated from `jfk-clinical-dashboard`
@@ -31,3 +33,14 @@ Consolidated clinical dashboard hub for ASAM documentation tools, JFK workflows,
 - `DECISIONS.md`: Key architectural and workflow decisions extracted from Notion.
 - `docs/jfk-clinical-dashboard.md`: Migrated JFK Clinical Dashboard project context, excluding Epic Email Intelligence content.
 - `docs/jfk-feedback-submission-fix-paused.md`: Paused JFK feedback submission repair findings and resume checklist.
+
+## Clinical Alcohol Calculators
+
+The calculator source lives in `apps/alcohol-calculators/`. Run commands from that folder:
+
+- Local development: `npm run dev`
+- Tests: `npm run test`
+- TypeScript check: `npm run check`
+- Build for GitHub Pages: `npm run build`
+
+The build writes static files to `alcohol-calculators/`, which is served by GitHub Pages at `https://troyfowlermd.github.io/clinical-dashboards/alcohol-calculators/`.
