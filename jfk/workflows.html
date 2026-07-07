@@ -17,7 +17,15 @@
 <link rel="author" href="https://www.perplexity.ai/computer">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Psychiatry Epic workflows for JFK ADATC with searchable reference checklists and installable offline app support.">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Epic Workflows">
   <title>Psychiatry Epic Workflows — JFK ADATC</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
   <style>
@@ -1475,5 +1483,14 @@
     /* Feedback form — handled by feedback-submit.js */
   </script>
   <script src="feedback-submit.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './' }).catch((error) => {
+          console.warn('[pwa] service worker registration failed:', error);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
