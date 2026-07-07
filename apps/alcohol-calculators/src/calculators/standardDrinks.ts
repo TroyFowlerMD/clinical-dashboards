@@ -5,6 +5,15 @@ import {
   volumeToFluidOunces
 } from "../utils/units";
 
+/** Blank fields are stored as ""; treat them as 0 for math and empty for display. */
+function toNumber(value: number | ""): number {
+  return value === "" || !Number.isFinite(Number(value)) ? 0 : Number(value);
+}
+
+function isBlank(value: number | ""): boolean {
+  return value === "";
+}
+
 export function calculateStandardDrinks(
   quantity: number,
   volume: number,
@@ -18,19 +27,30 @@ export function calculateStandardDrinks(
 export function validateDrinkInput(input: DrinkInput): string[] {
   const errors: string[] = [];
 
-  if (!Number.isFinite(input.quantity) || input.quantity < 0) {
+  // A fully blank row (nothing entered yet) is not an error; it just contributes 0.
+  const untouched =
+    isBlank(input.quantity) && isBlank(input.volume) && isBlank(input.abvPercent);
+  if (untouched) {
+    return errors;
+  }
+
+  const quantity = toNumber(input.quantity);
+  const volume = toNumber(input.volume);
+  const abv = toNumber(input.abvPercent);
+
+  if (quantity < 0) {
     errors.push("Quantity cannot be negative.");
   }
 
-  if (!Number.isFinite(input.volume) || input.volume < 0) {
+  if (volume < 0) {
     errors.push("Volume cannot be negative.");
   }
 
-  if (!Number.isFinite(input.abvPercent) || input.abvPercent <= 0) {
+  if (abv <= 0) {
     errors.push("ABV must be greater than 0.");
   }
 
-  if (input.abvPercent > 95) {
+  if (abv > 95) {
     errors.push("ABV should be 95% or lower.");
   }
 
@@ -43,8 +63,10 @@ export function validateDrinkInput(input: DrinkInput): string[] {
 
 export function calculateDrinkRow(input: DrinkInput): DrinkCalculation {
   const validationErrors = validateDrinkInput(input);
-  const volumeFlOz = volumeToFluidOunces(input.volume, input.unit);
-  const ethanolFlOz = input.quantity * volumeFlOz * (input.abvPercent / 100);
+  const quantity = toNumber(input.quantity);
+  const abv = toNumber(input.abvPercent);
+  const volumeFlOz = volumeToFluidOunces(toNumber(input.volume), input.unit);
+  const ethanolFlOz = quantity * volumeFlOz * (abv / 100);
   const standardDrinks = ethanolFlOz / STANDARD_DRINK_ETHANOL_FL_OZ;
   const gramsEthanol = ethanolFlOz * GRAMS_ETHANOL_PER_FL_OZ;
 
@@ -76,15 +98,21 @@ export function calculateTotalGramsEthanol(rows: DrinkCalculation[]): number {
 
 export function buildDocumentationSentence(rows: DrinkCalculation[]): string {
   const total = calculateTotalStandardDrinks(rows);
-  const parts = rows.map(({ input }) => {
-    const abv = Number.isInteger(input.abvPercent)
-      ? input.abvPercent.toFixed(0)
-      : input.abvPercent.toFixed(1);
-    const volume = Number.isInteger(input.volume)
-      ? input.volume.toString()
-      : input.volume.toFixed(1);
-    return `${input.quantity} x ${volume} ${input.unit} ${abv}% ${input.label}`;
-  });
+  const parts = rows
+    .filter((row) => row.standardDrinks > 0)
+    .map(({ input }) => {
+      const qtyNum = toNumber(input.quantity);
+      const volNum = toNumber(input.volume);
+      const abvNum = toNumber(input.abvPercent);
+      const abv = Number.isInteger(abvNum) ? abvNum.toFixed(0) : abvNum.toFixed(1);
+      const volume = Number.isInteger(volNum) ? volNum.toString() : volNum.toFixed(1);
+      const label = input.label.trim() || "drink";
+      return `${qtyNum} x ${volume} ${input.unit} ${abv}% ${label}`;
+    });
+
+  if (parts.length === 0) {
+    return "Enter at least one drink to generate a documentation sentence.";
+  }
 
   const joined =
     parts.length <= 1

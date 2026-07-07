@@ -19,11 +19,11 @@ function createDrinkRow(): DrinkInput {
       typeof crypto !== "undefined" && "randomUUID" in crypto
         ? crypto.randomUUID()
         : `row-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-    label: "Manual entry",
-    quantity: 1,
-    volume: 12,
+    label: "",
+    quantity: "",
+    volume: "",
     unit: "oz",
-    abvPercent: 5,
+    abvPercent: "",
     abvSource: "manual"
   };
 }
@@ -63,7 +63,10 @@ export default function StandardDrinkCalculator({ onBack }: StandardDrinkCalcula
         <div>
           <p className="eyebrow">Documentation calculator</p>
           <h1>Standard Drink Calculator</h1>
-          <p className="subtitle">1 U.S. standard drink = 0.6 fl oz pure ethanol = 14 g ethanol.</p>
+          <p className="subtitle">
+            Pick a category and product to auto-fill ABV and container sizes, or search across the
+            full directory. 1 U.S. standard drink = 0.6 fl oz pure ethanol = 14 g ethanol.
+          </p>
         </div>
       </header>
 

@@ -17,6 +17,7 @@
 - [ ] Decide whether `asam-app/` needs a deployable public entry point or should remain excluded from the public Pages clinical hub.
 
 ## Completed (last 30 days)
+- [~] Alcohol calculator prebuilt-drinks + UX overhaul (119 products, category cascade + type-ahead search, volume dropdown w/ nicknames + custom entry, empty-by-default numeric fields, multi-ABV variants). Built + tested; awaiting commit/push approval.
 - [x] Added the Clinical Alcohol Calculators mobile web app under `apps/alcohol-calculators/` with static Pages output at `alcohol-calculators/`.
 - [x] Consolidated clinical dashboards into `clinical-dashboards` with `asam-app/`, `asam-classic/`, and `jfk/`.
 - [x] Kept the ASAM React/Vite app in its own folder instead of flattening it into the static pages.

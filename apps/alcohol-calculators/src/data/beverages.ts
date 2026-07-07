@@ -1,529 +1,1688 @@
-import type { BeverageEntry } from "../types";
+import type { BeverageCategory, BeverageEntry, CategoryMeta } from "../types";
 
-const beerContainers = [
-  { volume: 12, unit: "oz" },
-  { volume: 16, unit: "oz" },
-  { volume: 24, unit: "oz" },
-  { volume: 25, unit: "oz" }
-] satisfies BeverageEntry["commonContainers"];
+// Auto-generated from NC-market research (July 2026). ABV and container
+// sizes were sourced from brand, distributor, retailer, and NC ABC pages.
+// The physical container label remains the definitive source, especially
+// for market/state-variable products (Four Loko, malt liquors, Everclear).
 
-const spiritContainers = [
-  { volume: 1, unit: "pint" },
-  { volume: 1, unit: "fifth" },
-  { volume: 1, unit: "handle" }
-] satisfies BeverageEntry["commonContainers"];
+export const categories: CategoryMeta[] = [
+  { id: "light-beer", label: "Light beer" },
+  { id: "domestic-beer", label: "Domestic / standard beer" },
+  { id: "import-beer", label: "Import beer" },
+  { id: "malt-high-gravity", label: "Malt liquor / high-gravity" },
+  { id: "hard-seltzer", label: "Hard seltzer" },
+  { id: "fmb-rtd", label: "Flavored malt / RTD cocktail" },
+  { id: "wine", label: "Wine" },
+  { id: "fortified-wine", label: "Fortified wine" },
+  { id: "spirits", label: "Spirits / liquor" },
+  { id: "liqueur", label: "Liqueur / cordial" },
+  { id: "wnc-craft", label: "WNC craft beer & cider" }
+];
 
 export const beverages: BeverageEntry[] = [
   {
-    id: "regular_beer",
-    displayName: "Regular beer",
-    aliases: ["beer", "generic beer"],
-    category: "beer",
-    defaultAbv: 5,
-    commonContainers: beerContainers,
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  {
-    id: "light_beer",
-    displayName: "Light beer",
-    aliases: ["lite beer"],
-    category: "beer",
+    id: "bud_light",
+    displayName: "Bud Light",
+    aliases: ["budlight"],
+    category: "light-beer",
+    style: "light lager",
     defaultAbv: 4.2,
-    commonContainers: beerContainers,
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  {
-    id: "high_gravity_beer",
-    displayName: "High-gravity beer",
-    aliases: ["strong beer", "ice beer"],
-    category: "high-gravity beer",
-    defaultAbv: 8,
-    commonContainers: beerContainers,
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  {
-    id: "malt_liquor",
-    displayName: "Malt liquor",
-    aliases: ["40", "forty", "malt"],
-    category: "malt liquor",
-    defaultAbv: 7,
-    commonContainers: [
-      { volume: 16, unit: "oz" },
-      { volume: 24, unit: "oz" },
-      { volume: 40, unit: "oz" }
-    ],
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  {
-    id: "hard_seltzer",
-    displayName: "Hard seltzer",
-    aliases: ["seltzer"],
-    category: "hard seltzer",
-    defaultAbv: 5,
-    commonContainers: beerContainers,
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  ...[8, 10, 12, 14].map((abv): BeverageEntry => ({
-    id: `flavored_malt_beverage_${abv}`,
-    displayName: `Flavored malt beverage (${abv}%)`,
-    aliases: ["fmb", "flavored malt beverage", "alcopop"],
-    category: "flavored malt beverage",
-    defaultAbv: abv,
-    commonContainers: beerContainers,
-    abvSource: "default assumption" as const,
-    notes: "Generic default. Verify package label when possible."
-  })),
-  {
-    id: "wine",
-    displayName: "Wine",
-    aliases: ["table wine"],
-    category: "wine",
-    defaultAbv: 12,
-    commonContainers: [
-      { volume: 5, unit: "oz" },
-      { volume: 750, unit: "mL" },
-      { volume: 1.5, unit: "L" }
-    ],
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  {
-    id: "boxed_wine",
-    displayName: "Boxed wine",
-    aliases: ["box wine"],
-    category: "wine",
-    defaultAbv: 12,
-    commonContainers: [
-      { volume: 3, unit: "L" },
-      { volume: 5, unit: "L" }
-    ],
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  {
-    id: "fortified_wine",
-    displayName: "Fortified wine",
-    aliases: ["port", "sherry"],
-    category: "fortified wine",
-    defaultAbv: 17,
-    commonContainers: [
-      { volume: 3, unit: "oz" },
-      { volume: 750, unit: "mL" }
-    ],
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  ...["Vodka", "Whiskey", "Rum", "Tequila", "Gin"].map((name): BeverageEntry => ({
-    id: name.toLowerCase(),
-    displayName: name,
-    aliases: [name.toLowerCase(), `${name.toLowerCase()} liquor`],
-    category: "spirits",
-    defaultAbv: 40,
-    commonContainers: spiritContainers,
-    abvSource: "default assumption" as const,
-    notes: "Generic 80 proof default. Verify package label when possible."
-  })),
-  {
-    id: "liqueur",
-    displayName: "Liqueur",
-    aliases: ["cordial", "liqueur cordial"],
-    category: "liqueur",
-    defaultAbv: 24,
-    commonContainers: [
-      { volume: 1.5, unit: "oz" },
-      { volume: 750, unit: "mL" }
-    ],
-    abvSource: "default assumption",
-    notes: "Generic default. Verify package label when possible."
-  },
-  {
-    id: "natty_daddy",
-    displayName: "Natty Daddy",
-    aliases: ["natty daddy", "natural light daddy", "natty"],
-    category: "high-gravity beer",
-    defaultAbv: 8,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 25, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Busch_Beer"
+  },
+  {
+    id: "coors_light",
+    displayName: "Coors Light",
+    aliases: [],
+    category: "light-beer",
+    style: "light lager",
+    defaultAbv: 4.2,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.coorslight.com/en-US/our-beer"
+  },
+  {
+    id: "miller_lite",
+    displayName: "Miller Lite",
+    aliases: [],
+    category: "light-beer",
+    style: "light lager",
+    defaultAbv: 4.2,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/ip/Miller-Lite-Beer-24-Pack-12-fl-oz-Aluminum-Cans-4-2-ABV-Domestic-Lager/10984517"
+  },
+  {
+    id: "michelob_ultra",
+    displayName: "Michelob Ultra",
+    aliases: ["mich ultra"],
+    category: "light-beer",
+    style: "light lager",
+    defaultAbv: 4.2,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 25, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/michelob-ultra-superior-light-beer-30pk-12-fl-oz-cans/-/A-47135920"
   },
   {
     id: "natural_light",
     displayName: "Natural Light",
     aliases: ["natty light"],
-    category: "light beer",
+    category: "light-beer",
+    style: "light lager",
     defaultAbv: 4.2,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 25, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.naturallight.com/products/natural-light"
   },
   {
-    id: "bud_light",
-    displayName: "Bud Light",
-    aliases: ["budlight"],
-    category: "light beer",
-    defaultAbv: 4.2,
-    commonContainers: beerContainers,
+    id: "busch_light",
+    displayName: "Busch Light",
+    aliases: [],
+    category: "light-beer",
+    style: "light lager",
+    defaultAbv: 4.1,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 25, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Busch_Beer"
+  },
+  {
+    id: "keystone_light",
+    displayName: "Keystone Light",
+    aliases: [],
+    category: "light-beer",
+    style: "light lager",
+    defaultAbv: 4.1,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.keystonelight.com"
+  },
+  {
+    id: "corona_premier",
+    displayName: "Corona Premier",
+    aliases: [],
+    category: "light-beer",
+    style: "light lager",
+    defaultAbv: 4,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.coronausa.com/pages/corona-premier"
+  },
+  {
+    id: "bud_light_next",
+    displayName: "Bud Light Next",
+    aliases: [],
+    category: "light-beer",
+    style: "light lager",
+    defaultAbv: 4,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/bud-light-next-12pk-12-fl-oz-cans/-/A-84636782"
   },
   {
     id: "budweiser",
     displayName: "Budweiser",
-    aliases: ["bud"],
-    category: "beer",
+    aliases: [],
+    category: "domestic-beer",
+    style: "lager",
     defaultAbv: 5,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 25, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Busch_Beer"
   },
   {
-    id: "coors_light",
-    displayName: "Coors Light",
-    aliases: ["coors lite"],
-    category: "light beer",
-    defaultAbv: 4.2,
-    commonContainers: beerContainers,
+    id: "coors_banquet",
+    displayName: "Coors Banquet",
+    aliases: [],
+    category: "domestic-beer",
+    style: "lager",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://58liquors.com/products/coors-banquet"
   },
   {
-    id: "miller_lite",
-    displayName: "Miller Lite",
-    aliases: ["miller light"],
-    category: "light beer",
-    defaultAbv: 4.2,
-    commonContainers: beerContainers,
-    abvSource: "product directory",
-    notes: "Verify package label when possible."
-  },
-  {
-    id: "michelob_ultra",
-    displayName: "Michelob Ultra",
-    aliases: ["ultra"],
-    category: "light beer",
-    defaultAbv: 4.2,
-    commonContainers: beerContainers,
-    abvSource: "product directory",
-    notes: "Verify package label when possible."
-  },
-  {
-    id: "modelo_especial",
-    displayName: "Modelo Especial",
-    aliases: ["modelo"],
-    category: "beer",
-    defaultAbv: 4.4,
-    commonContainers: beerContainers,
-    abvSource: "product directory",
-    notes: "Verify package label when possible."
-  },
-  {
-    id: "corona_extra",
-    displayName: "Corona Extra",
-    aliases: ["corona"],
-    category: "beer",
+    id: "miller_high_life",
+    displayName: "Miller High Life",
+    aliases: [],
+    category: "domestic-beer",
+    style: "lager",
     defaultAbv: 4.6,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 32, unit: "oz" }, { volume: 40, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.hopstersbrew.com/miller-high-life-alcohol-content-12-oz-calories/"
   },
   {
-    id: "heineken",
-    displayName: "Heineken",
-    aliases: ["heineken lager"],
-    category: "beer",
-    defaultAbv: 5,
-    commonContainers: beerContainers,
+    id: "miller_genuine_draft",
+    displayName: "Miller Genuine Draft",
+    aliases: ["mgd"],
+    category: "domestic-beer",
+    style: "lager",
+    defaultAbv: 4.6,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.kroger.com/p/miller-genuine-draft-lager-beer/0003410000562"
+  },
+  {
+    id: "yuengling_traditional_lager",
+    displayName: "Yuengling Traditional Lager",
+    aliases: [],
+    category: "domestic-beer",
+    style: "amber lager",
+    defaultAbv: 4.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.yuengling.com/our-beer/traditional-lager/"
   },
   {
     id: "pabst_blue_ribbon",
     displayName: "Pabst Blue Ribbon",
     aliases: ["pbr"],
-    category: "beer",
-    defaultAbv: 4.8,
-    commonContainers: beerContainers,
+    category: "domestic-beer",
+    style: "lager",
+    defaultAbv: 4.7,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 40, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://pabstblueribbon.com/product/"
   },
   {
-    id: "steel_reserve",
-    displayName: "Steel Reserve",
-    aliases: ["steel reserve 211", "211"],
-    category: "high-gravity beer",
+    id: "busch",
+    displayName: "Busch",
+    aliases: [],
+    category: "domestic-beer",
+    style: "lager",
+    defaultAbv: 4.3,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 25, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Busch_Beer"
+  },
+  {
+    id: "rolling_rock_extra_pale",
+    displayName: "Rolling Rock Extra Pale",
+    aliases: [],
+    category: "domestic-beer",
+    style: "pale lager",
+    defaultAbv: 4.4,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://untappd.com/b/latrobe-brewing-co-rolling-rock-extra-pale/38907/variants"
+  },
+  {
+    id: "genesee_cream_ale",
+    displayName: "Genesee Cream Ale",
+    aliases: [],
+    category: "domestic-beer",
+    style: "cream ale",
+    defaultAbv: 5.1,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.chesapeakebeverage.com/beverages/genesee-cream-ale/"
+  },
+  {
+    id: "corona_extra",
+    displayName: "Corona Extra",
+    aliases: ["corona"],
+    category: "import-beer",
+    style: "pale lager",
+    defaultAbv: 4.6,
+    commonContainers: [{ volume: 7, unit: "oz" }, { volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 32, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.coronausa.com/pages/corona-extra"
+  },
+  {
+    id: "modelo_especial",
+    displayName: "Modelo Especial",
+    aliases: ["modelo"],
+    category: "import-beer",
+    style: "pilsner-style lager",
+    defaultAbv: 4.4,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 32, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://ltverrastro.com/portfolio-item/modelo-especial/"
+  },
+  {
+    id: "negra_modelo",
+    displayName: "Negra Modelo",
+    aliases: [],
+    category: "import-beer",
+    style: "Munich dunkel",
+    defaultAbv: 5.4,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.robertchickfritz.com/modelo"
+  },
+  {
+    id: "heineken",
+    displayName: "Heineken",
+    aliases: [],
+    category: "import-beer",
+    style: "pale lager",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.heineken.com/us/en/our-beers/heineken-original/"
+  },
+  {
+    id: "stella_artois",
+    displayName: "Stella Artois",
+    aliases: [],
+    category: "import-beer",
+    style: "euro pale lager",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 11.2, unit: "oz" }, { volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.totalwine.com/beer/lager/euro-pale-lager/stella-artois/p/92131126"
+  },
+  {
+    id: "guinness_draught",
+    displayName: "Guinness Draught",
+    aliases: [],
+    category: "import-beer",
+    style: "Irish stout",
+    defaultAbv: 4.2,
+    commonContainers: [{ volume: 11.2, unit: "oz" }, { volume: 12, unit: "oz" }, { volume: 14.9, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.guinness.com/en-us/frequently-asked-questions"
+  },
+  {
+    id: "dos_equis_lager_especial",
+    displayName: "Dos Equis Lager Especial",
+    aliases: [],
+    category: "import-beer",
+    style: "pale lager",
+    defaultAbv: 4.2,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/dos-equis-mexican-lager-beer-12pk-12-fl-oz-cans/-/A-47137143"
+  },
+  {
+    id: "tecate_original",
+    displayName: "Tecate Original",
+    aliases: [],
+    category: "import-beer",
+    style: "pale lager",
+    defaultAbv: 4.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.kroger.com/p/tecate-original-mexican-lager-beer-12-pack-12-fl-oz-cans/0008982690033"
+  },
+  {
+    id: "pacifico_clara",
+    displayName: "Pacifico Clara",
+    aliases: [],
+    category: "import-beer",
+    style: "pilsner-style lager",
+    defaultAbv: 4.4,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.discoverpacifico.com/pages/la-cerveza"
+  },
+  {
+    id: "peroni_nastro_azzurro",
+    displayName: "Peroni Nastro Azzurro",
+    aliases: [],
+    category: "import-beer",
+    style: "euro pale lager",
+    defaultAbv: 5.1,
+    commonContainers: [{ volume: 11.2, unit: "oz" }, { volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://untappd.com/b/birra-peroni-nastro-azzurro/7427"
+  },
+  {
+    id: "labatt_blue",
+    displayName: "Labatt Blue",
+    aliases: [],
+    category: "import-beer",
+    style: "pale lager",
+    defaultAbv: 4.7,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 355, unit: "mL" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.labattusa.com/Labatt_Serving_Facts.pdf"
+  },
+  {
+    id: "molson_canadian",
+    displayName: "Molson Canadian",
+    aliases: [],
+    category: "import-beer",
+    style: "pale lager",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "US-sold version is 5.0%. Verify package label when possible.",
+    sourceUrl: "https://www.riesbeckfoods.com/shop/beer_wine_spirits/beer/molson_canadian_lager_beer_12_pack_12_fl_oz_bottles_5_abv/p/2374841"
+  },
+  {
+    id: "sapporo_premium",
+    displayName: "Sapporo Premium",
+    aliases: [],
+    category: "import-beer",
+    style: "pale lager",
+    defaultAbv: 4.9,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 19.2, unit: "oz" }, { volume: 22, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.sapporobeer.com/our-beers/sapporo-premium-beer"
+  },
+  {
+    id: "asahi_super_dry",
+    displayName: "Asahi Super Dry",
+    aliases: [],
+    category: "import-beer",
+    style: "pale lager",
+    defaultAbv: 5.2,
+    commonContainers: [{ volume: 11.2, unit: "oz" }, { volume: 12, unit: "oz" }, { volume: 19.2, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "US import is 5.2%. Verify package label when possible.",
+    sourceUrl: "https://holidaywinecellar.com/asahi-super-dry-6-pack/"
+  },
+  {
+    id: "steel_reserve_211_high_gravity",
+    displayName: "Steel Reserve 211 High Gravity",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "high-gravity lager",
     defaultAbv: 8.1,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 40, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    abvOptions: [6, 8.1],
+    notes: "ABV is 8.1% in most markets, 6.0% in some states. Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Steel_Reserve"
   },
-  ...[8, 10, 12, 14].map((abv): BeverageEntry => ({
-    id: `four_loko_${abv}`,
-    displayName: `Four Loko (${abv}%)`,
-    aliases: ["four loko", "4 loko"],
-    category: "flavored malt beverage",
-    defaultAbv: abv,
+  {
+    id: "colt_45",
+    displayName: "Colt 45",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "malt liquor",
+    defaultAbv: 5.6,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 25, unit: "oz" }, { volume: 40, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Colt_45_(malt_liquor)"
+  },
+  {
+    id: "olde_english_800",
+    displayName: "Olde English 800",
+    aliases: ["oe800"],
+    category: "malt-high-gravity",
+    style: "malt liquor",
+    defaultAbv: 5.9,
+    commonContainers: [{ volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 40, unit: "oz" }],
+    abvSource: "product directory",
+    abvOptions: [5.9, 7.7, 8],
+    notes: "Ships in multiple ABVs by region (5.9% / 7.7% East-Midwest / 8.0% High Gravity). Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Olde_English_800"
+  },
+  {
+    id: "king_cobra",
+    displayName: "King Cobra",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "malt liquor",
+    defaultAbv: 6,
+    commonContainers: [{ volume: 24, unit: "oz" }, { volume: 40, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Busch_Beer"
+  },
+  {
+    id: "natty_daddy",
+    displayName: "Natty Daddy",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "high-gravity lager",
+    defaultAbv: 8,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 25, unit: "oz" }],
+    abvSource: "product directory",
+    abvOptions: [5.9, 8],
+    notes: "Ships in 8.0% and a reduced 5.9% version. Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Busch_Beer"
+  },
+  {
+    id: "hurricane_high_gravity",
+    displayName: "Hurricane High Gravity",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "high-gravity lager",
+    defaultAbv: 8.1,
+    commonContainers: [{ volume: 16, unit: "oz" }, { volume: 25, unit: "oz" }, { volume: 40, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.billsdist.com/product/details?prodID=31"
+  },
+  {
+    id: "mickey_s",
+    displayName: "Mickey's",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "malt liquor",
+    defaultAbv: 5.6,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 32, unit: "oz" }, { volume: 40, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Mickey's"
+  },
+  {
+    id: "icehouse",
+    displayName: "Icehouse",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "ice lager",
+    defaultAbv: 5.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 40, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/icehouse-ice-lager-beer-6pk-16-fl-oz-cans/-/A-47579338"
+  },
+  {
+    id: "bud_ice",
+    displayName: "Bud Ice",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "ice lager",
+    defaultAbv: 5.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 25, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://bellbeverage.com/shop/anheuser-busch-bud-ice/"
+  },
+  {
+    id: "milwaukee_s_best_ice",
+    displayName: "Milwaukee's Best Ice",
+    aliases: [],
+    category: "malt-high-gravity",
+    style: "ice lager",
+    defaultAbv: 5.9,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.totalwine.com/beer/lager/light-lager/milwaukees-best-ice/p/6187131"
+  },
+  {
+    id: "four_loko",
+    displayName: "Four Loko",
+    aliases: ["4 loko"],
+    category: "malt-high-gravity",
+    style: "flavored high-gravity",
+    defaultAbv: 14,
+    commonContainers: [{ volume: 16, unit: "oz" }, { volume: 23.5, unit: "oz" }],
+    abvSource: "product directory",
     abvOptions: [8, 10, 12, 14],
-    commonContainers: [
-      { volume: 23.5, unit: "oz" },
-      { volume: 24, unit: "oz" }
-    ],
-    abvSource: "product directory" as const,
-    notes: "Four Loko ABV varies by product and state. Verify package label."
-  })),
-  {
-    id: "buzzballz",
-    displayName: "BuzzBallz",
-    aliases: ["buzz balls", "buzzball"],
-    category: "ready-to-drink cocktail",
-    defaultAbv: 15,
-    commonContainers: [{ volume: 200, unit: "mL" }],
-    abvSource: "product directory",
-    notes: "Common container listed as 200 mL. Verify product label."
-  },
-  {
-    id: "beatbox",
-    displayName: "BeatBox",
-    aliases: ["beat box"],
-    category: "ready-to-drink cocktail",
-    defaultAbv: 11.1,
-    commonContainers: [{ volume: 500, unit: "mL" }],
-    abvSource: "product directory",
-    notes: "Common container listed as 500 mL. Verify product label."
+    notes: "ABV varies by state (8/10/12/14%); NC retail is most commonly 12% or 14%. Confirm against the physical can label.",
+    sourceUrl: "https://fourloko.com/faq/q-what-is-the-alcohol-content-of-four-loko"
   },
   {
     id: "white_claw",
     displayName: "White Claw",
     aliases: ["whiteclaw"],
-    category: "hard seltzer",
+    category: "hard-seltzer",
+    style: "hard seltzer",
     defaultAbv: 5,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 19.2, unit: "oz" }, { volume: 24, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://shop.whiteclaw.com/products/white_claw_black_cherry_single_19_2oz_can_5_abv"
   },
   {
-    id: "truly",
-    displayName: "Truly",
-    aliases: ["truly hard seltzer"],
-    category: "hard seltzer",
+    id: "truly_hard_seltzer",
+    displayName: "Truly Hard Seltzer",
+    aliases: [],
+    category: "hard-seltzer",
+    style: "hard seltzer",
     defaultAbv: 5,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.trulyhardseltzer.com"
   },
   {
-    id: "twisted_tea",
-    displayName: "Twisted Tea",
-    aliases: ["twisted tea hard iced tea"],
-    category: "flavored malt beverage",
+    id: "truly_iced_tea",
+    displayName: "Truly Iced Tea",
+    aliases: [],
+    category: "hard-seltzer",
+    style: "hard seltzer tea",
     defaultAbv: 5,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.totalwine.com/beer/seltzers-flavored-beverages/hard-seltzer/truly-tea-hard-seltzer-variety/p/273509122"
   },
   {
-    id: "mikes_hard_lemonade",
+    id: "bud_light_seltzer",
+    displayName: "Bud Light Seltzer",
+    aliases: [],
+    category: "hard-seltzer",
+    style: "hard seltzer",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 25, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.billsdist.com/product/details?prodID=2122&packID=1948"
+  },
+  {
+    id: "high_noon_vodka_seltzer",
+    displayName: "High Noon (Vodka Seltzer)",
+    aliases: ["high noon"],
+    category: "hard-seltzer",
+    style: "vodka seltzer",
+    defaultAbv: 4.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 355, unit: "mL" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/high-noon-grapefruit-vodka-hard-seltzer-4pk-355ml-cans/-/A-54603842"
+  },
+  {
+    id: "high_noon_vodka_iced_tea",
+    displayName: "High Noon Vodka Iced Tea",
+    aliases: [],
+    category: "hard-seltzer",
+    style: "vodka iced tea",
+    defaultAbv: 4.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 355, unit: "mL" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/ip/High-Noon-Original-Vodka-Iced-Tea-4-Pack-12-fl-oz-Single-Serve-Cans-355ml-Serving-Size/13774207951"
+  },
+  {
+    id: "michelob_ultra_organic_seltzer",
+    displayName: "Michelob Ultra Organic Seltzer",
+    aliases: [],
+    category: "hard-seltzer",
+    style: "hard seltzer",
+    defaultAbv: 4,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.michelobultra.com/products/seltzers/watermelon-strawberry"
+  },
+  {
+    id: "topo_chico_hard_seltzer",
+    displayName: "Topo Chico Hard Seltzer",
+    aliases: [],
+    category: "hard-seltzer",
+    style: "hard seltzer",
+    defaultAbv: 4.7,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.kroger.com/p/topo-chico-hard-seltzer-tangy-lemon-lime-single-can/0002113618095"
+  },
+  {
+    id: "nutrl_vodka_seltzer",
+    displayName: "Nutrl (Vodka Seltzer)",
+    aliases: ["nutrl"],
+    category: "hard-seltzer",
+    style: "vodka seltzer",
+    defaultAbv: 4.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 355, unit: "mL" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.nutrlusa.com/faq"
+  },
+  {
+    id: "vizzy_hard_seltzer",
+    displayName: "Vizzy Hard Seltzer",
+    aliases: [],
+    category: "hard-seltzer",
+    style: "hard seltzer",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.totalwine.com/beer/seltzers-flavored-beverages/hard-seltzer/vizzy-mimosa-hard-seltzer-variety-pack/p/342191122"
+  },
+  {
+    id: "twisted_tea_original",
+    displayName: "Twisted Tea Original",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "hard iced tea",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }, { volume: 5, unit: "L" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Twisted_Tea"
+  },
+  {
+    id: "twisted_tea_half_half",
+    displayName: "Twisted Tea Half & Half",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "hard iced tea",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/twisted-tea-half-38-half-hard-iced-tea-6pk-12-fl-oz-bottles/-/A-47798637"
+  },
+  {
+    id: "mike_s_hard_lemonade",
     displayName: "Mike's Hard Lemonade",
-    aliases: ["mike's", "mikes hard lemonade"],
-    category: "flavored malt beverage",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "flavored malt beverage",
     defaultAbv: 5,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 11.2, unit: "oz" }, { volume: 12, unit: "oz" }, { volume: 16, unit: "oz" }, { volume: 24, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Verify package label when possible."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/mike-39-s-hard-lemonade-6pk-11-2-fl-oz-bottles/-/A-15420433"
+  },
+  {
+    id: "smirnoff_ice",
+    displayName: "Smirnoff Ice",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "flavored malt beverage",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 11.2, unit: "oz" }, { volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Smirnoff"
+  },
+  {
+    id: "bud_light_lime_a_rita",
+    displayName: "Bud Light Lime-A-Rita",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "flavored malt beverage",
+    defaultAbv: 8,
+    commonContainers: [{ volume: 8, unit: "oz" }, { volume: 25, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Retail availability in NC is inconsistent. Verify package label when possible.",
+    sourceUrl: "https://chevychasewine.com/Bud-Light-Lime-A-Rita-25oz-018200250149-6998/"
+  },
+  {
+    id: "buzzballz",
+    displayName: "BuzzBallz",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "ready-to-drink cocktail",
+    defaultAbv: 15,
+    commonContainers: [{ volume: 187, unit: "mL" }, { volume: 200, unit: "mL" }, { volume: 1.5, unit: "L", nickname: "Biggie" }, { volume: 1.75, unit: "L", nickname: "Biggie" }],
+    abvSource: "product directory",
+    notes: "Spirit-based, 15% (30 proof). Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/BuzzBallz"
+  },
+  {
+    id: "beatbox",
+    displayName: "BeatBox",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "ready-to-drink cocktail",
+    defaultAbv: 11.1,
+    commonContainers: [{ volume: 500, unit: "mL" }, { volume: 5, unit: "L", nickname: "box" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://beatboxbeverages.com/pages/flavors"
+  },
+  {
+    id: "cutwater_canned_cocktails",
+    displayName: "Cutwater Canned Cocktails",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "ready-to-drink cocktail",
+    defaultAbv: 10,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    abvOptions: [7, 10, 12.5, 13],
+    notes: "ABV is per-cocktail (~7-13%). Select the value from the specific can label.",
+    sourceUrl: "https://www.cutwaterspirits.com/canned-cocktails"
+  },
+  {
+    id: "surfside_iced_tea_vodka",
+    displayName: "Surfside Iced Tea + Vodka",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "vodka iced tea",
+    defaultAbv: 4.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 19.2, unit: "oz" }, { volume: 355, unit: "mL" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/surfside-iced-tea-vodka-12pk-355ml-cans/-/A-94970770"
+  },
+  {
+    id: "the_long_drink_traditional",
+    displayName: "The Long Drink Traditional",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "ready-to-drink cocktail",
+    defaultAbv: 5.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 355, unit: "mL" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.kroger.com/p/the-long-drink-company-traditional-cocktail-can/0086027200140"
+  },
+  {
+    id: "cayman_jack_margarita",
+    displayName: "Cayman Jack Margarita",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "flavored malt beverage",
+    defaultAbv: 5.8,
+    commonContainers: [{ volume: 11.2, unit: "oz" }, { volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/cayman-jack-margarita-cocktail-6pk-11-2-fl-oz-bottles/-/A-14983874"
+  },
+  {
+    id: "cayman_jack_margarita_zero",
+    displayName: "Cayman Jack Margarita Zero",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "flavored malt beverage",
+    defaultAbv: 4.8,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/cayman-jack-margarita-zero-12pk-12-fl-oz-cans/-/A-87741900"
+  },
+  {
+    id: "simply_spiked_lemonade",
+    displayName: "Simply Spiked Lemonade",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "flavored malt beverage",
+    defaultAbv: 5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.ubereats.com/product/b/440cca49-271f-5e07-a794-c4af03f131ae"
+  },
+  {
+    id: "modelo_chelada",
+    displayName: "Modelo Chelada",
+    aliases: [],
+    category: "fmb-rtd",
+    style: "chelada",
+    defaultAbv: 3.5,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 24, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Mainline flavors 3.5%; Tamarindo Picante 3.2%. Verify package label when possible.",
+    sourceUrl: "https://www.totalwine.com/beer/specialty-styles/specialty-beer/modelo-chelada-pina-picante/p/331774230"
+  },
+  {
+    id: "table_wine_generic_red_white",
+    displayName: "Table wine (generic red/white)",
+    aliases: ["table wine"],
+    category: "wine",
+    style: "table wine",
+    defaultAbv: 12.5,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 187, unit: "mL", nickname: "split" }, { volume: 375, unit: "mL", nickname: "half" }, { volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }],
+    abvSource: "product directory",
+    notes: "Category-representative (11.5-13.5%). Use the printed label for precision.",
+    sourceUrl: "https://www.vinovest.co/blog/wine-alcohol-content"
+  },
+  {
+    id: "barefoot_cabernet_sauvignon",
+    displayName: "Barefoot Cabernet Sauvignon",
+    aliases: [],
+    category: "wine",
+    style: "red wine",
+    defaultAbv: 13.5,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 187, unit: "mL", nickname: "split" }, { volume: 375, unit: "mL", nickname: "half" }, { volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://untappd.com/b/barefoot-wine-cabernet-sauvignon/6508821"
+  },
+  {
+    id: "sutter_home_cabernet_sauvignon",
+    displayName: "Sutter Home Cabernet Sauvignon",
+    aliases: [],
+    category: "wine",
+    style: "red wine",
+    defaultAbv: 13,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 187, unit: "mL", nickname: "split" }, { volume: 375, unit: "mL", nickname: "half" }, { volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }],
+    abvSource: "product directory",
+    notes: "13% (1.5L) / 13.9% (187mL). Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/browse/food/all-wine/sutter-home/976759_2975985_5538515/"
+  },
+  {
+    id: "yellow_tail_shiraz",
+    displayName: "Yellow Tail Shiraz",
+    aliases: [],
+    category: "wine",
+    style: "red wine",
+    defaultAbv: 13.5,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 187, unit: "mL", nickname: "split" }, { volume: 375, unit: "mL", nickname: "half" }, { volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://buywinesonline.com/products/yellow-tail-shiraz-750-ml"
+  },
+  {
+    id: "josh_cellars_cabernet_sauvignon",
+    displayName: "Josh Cellars Cabernet Sauvignon",
+    aliases: [],
+    category: "wine",
+    style: "red wine",
+    defaultAbv: 13.5,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.kroger.com/p/josh-cellars-cabernet-sauvignon-california-red-wine/0085774400131"
+  },
+  {
+    id: "franzia_boxed",
+    displayName: "Franzia (boxed)",
+    aliases: ["franzia"],
+    category: "wine",
+    style: "boxed wine",
+    defaultAbv: 13,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 3, unit: "L", nickname: "box" }, { volume: 5, unit: "L", nickname: "box" }],
+    abvSource: "product directory",
+    notes: "Pinot Grigio 12.5%. Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/browse/food/wine/franzia/976759_2975985_8604954/"
+  },
+  {
+    id: "chardonnay_generic_white",
+    displayName: "Chardonnay (generic white)",
+    aliases: ["chardonnay"],
+    category: "wine",
+    style: "white wine",
+    defaultAbv: 13.5,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 187, unit: "mL", nickname: "split" }, { volume: 375, unit: "mL", nickname: "half" }, { volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }],
+    abvSource: "product directory",
+    notes: "Category-representative. Use the printed label for precision.",
+    sourceUrl: "https://www.walmart.com/ip/Sutter-Home-Chardonnay-California-White-Wine-4-Pack-187-ml-Glass-Bottles-13-5-ABV/14053294"
+  },
+  {
+    id: "pinot_grigio_generic",
+    displayName: "Pinot Grigio (generic)",
+    aliases: ["pinot grigio"],
+    category: "wine",
+    style: "white wine",
+    defaultAbv: 12.5,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }, { volume: 3, unit: "L", nickname: "box" }, { volume: 5, unit: "L", nickname: "box" }],
+    abvSource: "product directory",
+    notes: "Category-representative. Use the printed label for precision.",
+    sourceUrl: "https://www.walmart.com/ip/Franzia-Pinot-Grigio-Colombard-Vintner-Select-White-Wine-International-5-L-Bag-in-Box-13-ABV/185684115"
+  },
+  {
+    id: "prosecco",
+    displayName: "Prosecco",
+    aliases: [],
+    category: "wine",
+    style: "sparkling wine",
+    defaultAbv: 11.5,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 750, unit: "mL", nickname: "bottle" }],
+    abvSource: "product directory",
+    notes: "Category-representative (11-12%). Verify package label when possible.",
+    sourceUrl: "https://www.vinovest.co/blog/champagne-alcohol-content"
+  },
+  {
+    id: "champagne_sparkling",
+    displayName: "Champagne (sparkling)",
+    aliases: ["champagne"],
+    category: "wine",
+    style: "sparkling wine",
+    defaultAbv: 12.2,
+    commonContainers: [{ volume: 5, unit: "oz", nickname: "glass" }, { volume: 187, unit: "mL", nickname: "split" }, { volume: 750, unit: "mL", nickname: "bottle" }],
+    abvSource: "product directory",
+    notes: "Category-representative (12-12.5%). Verify package label when possible.",
+    sourceUrl: "https://www.vinovest.co/blog/champagne-alcohol-content"
+  },
+  {
+    id: "port_generic_ruby_tawny",
+    displayName: "Port (generic Ruby/Tawny)",
+    aliases: ["port"],
+    category: "fortified-wine",
+    style: "fortified wine",
+    defaultAbv: 19,
+    commonContainers: [{ volume: 3, unit: "oz" }, { volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }],
+    abvSource: "product directory",
+    notes: "Category-representative (18-20%). Use the printed label for precision.",
+    sourceUrl: "https://www.marketviewliquor.com/product/wine/taylor-tawny-port-15-ltr"
+  },
+  {
+    id: "sherry_generic",
+    displayName: "Sherry (generic)",
+    aliases: ["sherry"],
+    category: "fortified-wine",
+    style: "fortified wine",
+    defaultAbv: 18,
+    commonContainers: [{ volume: 3, unit: "oz" }, { volume: 750, unit: "mL", nickname: "bottle" }],
+    abvSource: "product directory",
+    notes: "Category-representative (15-22%). Use the printed label for precision.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Sherry"
+  },
+  {
+    id: "md_20_20_mad_dog",
+    displayName: "MD 20/20 (Mad Dog)",
+    aliases: ["md 20/20"],
+    category: "fortified-wine",
+    style: "fortified wine",
+    defaultAbv: 15,
+    commonContainers: [{ volume: 375, unit: "mL" }, { volume: 750, unit: "mL", nickname: "bottle" }],
+    abvSource: "product directory",
+    abvOptions: [13, 15, 18],
+    notes: "ABV varies by flavor (13-18%). Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/MD_20/20"
+  },
+  {
+    id: "wild_irish_rose",
+    displayName: "Wild Irish Rose",
+    aliases: [],
+    category: "fortified-wine",
+    style: "fortified wine",
+    defaultAbv: 13.9,
+    commonContainers: [{ volume: 750, unit: "mL", nickname: "bottle" }, { volume: 1.5, unit: "L", nickname: "magnum" }, { volume: 3, unit: "L", nickname: "jug" }],
+    abvSource: "product directory",
+    abvOptions: [13.9, 17],
+    notes: "13.9% table version and 17% version with citrus spirits. Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Wild_Irish_Rose"
+  },
+  {
+    id: "night_train_express",
+    displayName: "Night Train Express",
+    aliases: [],
+    category: "fortified-wine",
+    style: "fortified wine",
+    defaultAbv: 17.5,
+    commonContainers: [{ volume: 750, unit: "mL", nickname: "bottle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Night_Train_Express"
+  },
+  {
+    id: "vodka_generic_80_proof",
+    displayName: "Vodka (generic 80 proof)",
+    aliases: ["vodka"],
+    category: "spirits",
+    style: "vodka",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Generic 80 proof. Verify package label when possible.",
+    sourceUrl: "https://www.vinovest.co/blog/wine-alcohol-content"
+  },
+  {
+    id: "tito_s_handmade_vodka",
+    displayName: "Tito's Handmade Vodka",
+    aliases: ["titos"],
+    category: "spirits",
+    style: "vodka",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Tito's_Vodka"
+  },
+  {
+    id: "smirnoff_no_21_vodka",
+    displayName: "Smirnoff No. 21 Vodka",
+    aliases: ["smirnoff"],
+    category: "spirits",
+    style: "vodka",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/ip/Smirnoff-No-21-80-Proof-Vodka-200-mL-40-ABV/160644917"
+  },
+  {
+    id: "grey_goose_vodka",
+    displayName: "Grey Goose Vodka",
+    aliases: [],
+    category: "spirits",
+    style: "vodka",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.barneysmarket.com/shop/beer_wine_spirits/liquor/vodka/grey_goose_vodka_750ml_bottle_abv_40/p/181753"
+  },
+  {
+    id: "svedka_vodka",
+    displayName: "Svedka Vodka",
+    aliases: [],
+    category: "spirits",
+    style: "vodka",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.kahnsfinewines.com/product/svedka-vodka-80-pr-750-ml-24ktim5kj0h2x"
+  },
+  {
+    id: "new_amsterdam_vodka",
+    displayName: "New Amsterdam Vodka",
+    aliases: [],
+    category: "spirits",
+    style: "vodka",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.marketviewliquor.com/product/spirit/new-amsterdam-vodka-750-ml"
+  },
+  {
+    id: "whiskey_bourbon_generic_80_proof",
+    displayName: "Whiskey / Bourbon (generic 80 proof)",
+    aliases: ["whiskey / bourbon"],
+    category: "spirits",
+    style: "whiskey",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Generic 80 proof. Verify package label when possible.",
+    sourceUrl: "https://www.vinovest.co/blog/wine-alcohol-content"
+  },
+  {
+    id: "jack_daniel_s_old_no_7",
+    displayName: "Jack Daniel's Old No. 7",
+    aliases: ["jack daniels"],
+    category: "spirits",
+    style: "Tennessee whiskey",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/ip/Jack-Daniel-s-Old-No-7-Tennessee-Whiskey-1-L-Bottle-40-ABV/142888001"
+  },
+  {
+    id: "jim_beam_kentucky_bourbon",
+    displayName: "Jim Beam Kentucky Bourbon",
+    aliases: [],
+    category: "spirits",
+    style: "bourbon",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Jim_Beam"
+  },
+  {
+    id: "maker_s_mark_bourbon",
+    displayName: "Maker's Mark Bourbon",
+    aliases: [],
+    category: "spirits",
+    style: "bourbon",
+    defaultAbv: 45,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://rockymountainwinespiritsbeer.com/shop/liquor-spirits/whiskey/makers-mark/"
+  },
+  {
+    id: "woodford_reserve_bourbon",
+    displayName: "Woodford Reserve Bourbon",
+    aliases: [],
+    category: "spirits",
+    style: "bourbon",
+    defaultAbv: 45.2,
+    commonContainers: [{ volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.bswliquor.com/products/woodford-reserve-bourbon-1"
+  },
+  {
+    id: "crown_royal",
+    displayName: "Crown Royal",
+    aliases: [],
+    category: "spirits",
+    style: "Canadian whisky",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.totalwine.com/spirits/canadian-whisky/crown-royal/p/2740750"
+  },
+  {
+    id: "rum_generic_80_proof",
+    displayName: "Rum (generic 80 proof)",
+    aliases: ["rum"],
+    category: "spirits",
+    style: "rum",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Generic 80 proof. Verify package label when possible.",
+    sourceUrl: "https://www.vinovest.co/blog/wine-alcohol-content"
+  },
+  {
+    id: "bacardi_superior_rum",
+    displayName: "Bacardi Superior Rum",
+    aliases: [],
+    category: "spirits",
+    style: "white rum",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/ip/BACARDI-Superior-White-Rum-Gluten-Free-1-75-L-Bottle-ABV-40/125901997"
+  },
+  {
+    id: "captain_morgan_original_spiced_rum",
+    displayName: "Captain Morgan Original Spiced Rum",
+    aliases: ["captain morgan"],
+    category: "spirits",
+    style: "spiced rum",
+    defaultAbv: 35,
+    commonContainers: [{ volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/ip/Captain-Morgan-Original-Spiced-Rum-750-mL-35-ABV/12167175"
+  },
+  {
+    id: "tequila_generic_80_proof",
+    displayName: "Tequila (generic 80 proof)",
+    aliases: ["tequila"],
+    category: "spirits",
+    style: "tequila",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Generic 80 proof. Verify package label when possible.",
+    sourceUrl: "https://www.vinovest.co/blog/wine-alcohol-content"
+  },
+  {
+    id: "jose_cuervo_especial",
+    displayName: "Jose Cuervo Especial",
+    aliases: ["cuervo"],
+    category: "spirits",
+    style: "tequila",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.walmart.com/ip/Jose-Cuervo-Especial-Gold-Tequila-40-ABV-80-Proof-1-Count-750-ml-Glass-Bottle/34754436"
+  },
+  {
+    id: "patron_silver_tequila",
+    displayName: "Patron Silver Tequila",
+    aliases: [],
+    category: "spirits",
+    style: "tequila",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/patr-243-n-silver-tequila-750ml-bottle/-/A-14778310"
+  },
+  {
+    id: "gin_generic_80_proof",
+    displayName: "Gin (generic 80 proof)",
+    aliases: ["gin"],
+    category: "spirits",
+    style: "gin",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Generic 80 proof. Verify package label when possible.",
+    sourceUrl: "https://www.vinovest.co/blog/wine-alcohol-content"
+  },
+  {
+    id: "tanqueray_london_dry_gin",
+    displayName: "Tanqueray London Dry Gin",
+    aliases: [],
+    category: "spirits",
+    style: "gin",
+    defaultAbv: 47.3,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://theginisin.com/gin-reviews/tanqueray/"
+  },
+  {
+    id: "fireball_cinnamon_whisky",
+    displayName: "Fireball Cinnamon Whisky",
+    aliases: [],
+    category: "spirits",
+    style: "whiskey liqueur",
+    defaultAbv: 33,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }, { volume: 100, unit: "mL" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.fireballwhisky.com/faqs.html"
+  },
+  {
+    id: "hennessy_vs_cognac",
+    displayName: "Hennessy VS Cognac",
+    aliases: [],
+    category: "spirits",
+    style: "cognac",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.cheersondemand.com/hennessy-vs-cognac-abv-40-750-ml.html"
+  },
+  {
+    id: "everclear_190_proof",
+    displayName: "Everclear 190 proof",
+    aliases: [],
+    category: "spirits",
+    style: "grain alcohol",
+    defaultAbv: 95,
+    commonContainers: [{ volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }],
+    abvSource: "product directory",
+    notes: "Carried in NC per NC ABC price database. Availability varies by local ABC board.",
+    sourceUrl: "https://abc2.nc.gov/Pricing/ViewItemDetails/141422"
+  },
+  {
+    id: "everclear_151_proof",
+    displayName: "Everclear 151 proof",
+    aliases: [],
+    category: "spirits",
+    style: "grain alcohol",
+    defaultAbv: 75.5,
+    commonContainers: [{ volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://caskcartel.com/products/everclear-151-grain-alcohol"
+  },
+  {
+    id: "jagermeister",
+    displayName: "Jagermeister",
+    aliases: [],
+    category: "liqueur",
+    style: "herbal liqueur",
+    defaultAbv: 35,
+    commonContainers: [{ volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/J%C3%A4germeister"
+  },
+  {
+    id: "baileys_original_irish_cream",
+    displayName: "Baileys Original Irish Cream",
+    aliases: [],
+    category: "liqueur",
+    style: "cream liqueur",
+    defaultAbv: 17,
+    commonContainers: [{ volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.baileys.com/en-us/frequently-asked-questions"
+  },
+  {
+    id: "malibu_coconut_rum",
+    displayName: "Malibu Coconut Rum",
+    aliases: [],
+    category: "liqueur",
+    style: "coconut liqueur",
+    defaultAbv: 21,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://lindasliquorandwine.com/product/malibu-original-rum/"
+  },
+  {
+    id: "kahlua",
+    displayName: "Kahlua",
+    aliases: [],
+    category: "liqueur",
+    style: "coffee liqueur",
+    defaultAbv: 20,
+    commonContainers: [{ volume: 200, unit: "mL" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.shakersmarketplace.com/shop/beer_wine_spirits/liquor/liqueur/kahlua_original_rum_and_coffee_liqueur_750_m_l_bottle_20_abv/p/182671"
+  },
+  {
+    id: "triple_sec_dekuyper",
+    displayName: "Triple Sec (DeKuyper)",
+    aliases: ["triple sec"],
+    category: "liqueur",
+    style: "orange liqueur",
+    defaultAbv: 15,
+    commonContainers: [{ volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.ptaceksiga.com/shop/beer_wine_spirits/liquor/de_kuyper_triple_sec_liqueur_1_l/p/1318591"
+  },
+  {
+    id: "cointreau",
+    displayName: "Cointreau",
+    aliases: [],
+    category: "liqueur",
+    style: "orange liqueur",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.cointreau.com/int/en/products/cointreau-lunique"
+  },
+  {
+    id: "grand_marnier",
+    displayName: "Grand Marnier",
+    aliases: [],
+    category: "liqueur",
+    style: "orange & cognac liqueur",
+    defaultAbv: 40,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.blackwellswines.com/products/grand-marnier"
+  },
+  {
+    id: "southern_comfort",
+    displayName: "Southern Comfort",
+    aliases: ["soco"],
+    category: "liqueur",
+    style: "whiskey liqueur",
+    defaultAbv: 35,
+    commonContainers: [{ volume: 50, unit: "mL", nickname: "mini" }, { volume: 375, unit: "mL", nickname: "pint" }, { volume: 750, unit: "mL", nickname: "fifth" }, { volume: 1, unit: "L" }, { volume: 1.75, unit: "L", nickname: "handle" }],
+    abvSource: "product directory",
+    abvOptions: [21, 35, 50],
+    notes: "US variants: 42 proof (21%), 70 proof (35%), 100 proof (50%). Verify package label when possible.",
+    sourceUrl: "https://en.wikipedia.org/wiki/Southern_Comfort"
   },
   {
     id: "highland_gaelic_ale",
     displayName: "Highland Gaelic Ale",
-    aliases: ["gaelic", "gaelic ale"],
-    category: "amber ale",
+    aliases: ["gaelic"],
+    category: "wnc-craft",
+    style: "amber ale",
     defaultAbv: 5.5,
-    commonContainers: [
-      { volume: 12, unit: "oz" },
-      { volume: 19.2, unit: "oz" }
-    ],
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Highland Brewing listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://highlandbrewing.com/beers/gaelic/"
   },
   {
     id: "highland_avl_ipa",
     displayName: "Highland AVL IPA",
-    aliases: ["avl ipa"],
-    category: "IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "IPA",
     defaultAbv: 6.5,
-    commonContainers: [
-      { volume: 12, unit: "oz" },
-      { volume: 19.2, unit: "oz" }
-    ],
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Highland Brewing listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://highlandbrewing.com/beers/avl-ipa/"
   },
   {
-    id: "hiwire_hipitch_mosaic",
+    id: "hi_wire_hi_pitch_mosaic_ipa",
     displayName: "Hi-Wire Hi-Pitch Mosaic IPA",
-    aliases: ["hi-pitch", "hi pitch", "hiwire hi pitch"],
-    category: "IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "IPA",
     defaultAbv: 6.7,
-    commonContainers: [
-      { volume: 12, unit: "oz" },
-      { volume: 16, unit: "oz" }
-    ],
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Hi-Wire flagship listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://hiwirebrewing.com/flagships/"
   },
   {
-    id: "hiwire_bed_of_nails",
-    displayName: "Hi-Wire Bed of Nails Brown",
-    aliases: ["bed of nails", "hiwire bed of nails"],
-    category: "brown ale",
+    id: "hi_wire_lo_pitch_hazy_ipa",
+    displayName: "Hi-Wire Lo-Pitch Hazy IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "hazy IPA",
     defaultAbv: 5.5,
-    commonContainers: [{ volume: 16, unit: "oz" }],
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "ABV listings vary between 5.5% and 6.1%; verify label before relying on this default."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://hiwirebrewing.com/flagships/"
   },
   {
-    id: "wicked_weed_pernicious",
+    id: "hi_wire_bed_of_nails_brown",
+    displayName: "Hi-Wire Bed of Nails Brown",
+    aliases: [],
+    category: "wnc-craft",
+    style: "brown ale",
+    defaultAbv: 5.5,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://hiwirebrewing.com/flagships/"
+  },
+  {
+    id: "hi_wire_double_hi_pitch_ipa",
+    displayName: "Hi-Wire Double Hi-Pitch IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "double IPA",
+    defaultAbv: 9,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://hiwirebrewing.com/flagships/"
+  },
+  {
+    id: "wicked_weed_pernicious_ipa",
     displayName: "Wicked Weed Pernicious IPA",
     aliases: ["pernicious"],
-    category: "IPA",
+    category: "wnc-craft",
+    style: "IPA",
     defaultAbv: 7.3,
-    commonContainers: [
-      { volume: 12, unit: "oz" },
-      { volume: 16, unit: "oz" }
-    ],
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Wicked Weed listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.wickedweedbrewing.com/beer/pernicious/"
   },
   {
     id: "green_man_ipa",
     displayName: "Green Man IPA",
     aliases: ["green man"],
-    category: "IPA",
+    category: "wnc-craft",
+    style: "IPA",
     defaultAbv: 6.2,
-    commonContainers: [
-      { volume: 12, unit: "oz" },
-      { volume: 16, unit: "oz" }
-    ],
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Green Man listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.greenmanbrewery.com/all-beers/green-man:-ipa"
   },
   {
-    id: "asheville_brewing_shiva_ipa",
-    displayName: "Asheville Brewing Shiva IPA",
-    aliases: ["shiva", "shiva ipa"],
-    category: "IPA",
-    defaultAbv: 6,
-    commonContainers: [
-      { volume: 12, unit: "oz" },
-      { volume: 16, unit: "oz" }
-    ],
+    id: "green_man_esb",
+    displayName: "Green Man ESB",
+    aliases: [],
+    category: "wnc-craft",
+    style: "ESB",
+    defaultAbv: 5.5,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Asheville Brewing listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.beermenus.com/breweries/8591-green-man-brewery-nc"
   },
   {
-    id: "catawba_white_zombie",
-    displayName: "Catawba White Zombie",
-    aliases: ["white zombie"],
-    category: "white ale",
+    id: "catawba_white_zombie_white_ale",
+    displayName: "Catawba White Zombie White Ale",
+    aliases: [],
+    category: "wnc-craft",
+    style: "witbier",
     defaultAbv: 5.1,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Catawba listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.target.com/p/catawba-white-zombie-white-ale-beer-6pk-12-fl-oz-cans/-/A-51251294"
+  },
+  {
+    id: "burial_surf_wax_ipa",
+    displayName: "Burial Surf Wax IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "IPA",
+    defaultAbv: 6.8,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://burialbeer.com/products/surf-wax-ipa-6-pack"
+  },
+  {
+    id: "sierra_nevada_pale_ale",
+    displayName: "Sierra Nevada Pale Ale",
+    aliases: ["sierra nevada"],
+    category: "wnc-craft",
+    style: "pale ale",
+    defaultAbv: 5.6,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Brewed at the Mills River, NC brewery. Verify package label when possible.",
+    sourceUrl: "https://www.tellurideblues.com/news/introducing-the-2024-craft-beer-styles-from-sierra-nevada"
+  },
+  {
+    id: "sierra_nevada_hazy_little_thing",
+    displayName: "Sierra Nevada Hazy Little Thing",
+    aliases: [],
+    category: "wnc-craft",
+    style: "hazy IPA",
+    defaultAbv: 6.7,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 19.2, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://sierranevada.com/blog/our-beer/what-is-a-hazy-ipa"
+  },
+  {
+    id: "sierra_nevada_torpedo_extra_ipa",
+    displayName: "Sierra Nevada Torpedo Extra IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "IPA",
+    defaultAbv: 7.2,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://mullarkeydist.com/brand/sierra-nevada/"
   },
   {
     id: "new_belgium_fat_tire",
     displayName: "New Belgium Fat Tire",
     aliases: ["fat tire"],
-    category: "amber ale",
+    category: "wnc-craft",
+    style: "amber ale",
     defaultAbv: 5.2,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from New Belgium classic Fat Tire listing. Verify package label."
+    notes: "Brewed at the Asheville, NC brewery. Verify package label when possible.",
+    sourceUrl: "https://www.newbelgium.com/beer/fat-tire/"
   },
   {
     id: "new_belgium_voodoo_ranger_ipa",
     displayName: "New Belgium Voodoo Ranger IPA",
-    aliases: ["voodoo ranger", "voodoo ranger ipa"],
-    category: "IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "IPA",
     defaultAbv: 7,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from New Belgium listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://www.newbelgium.com/beer/voodoo-ranger-ipa/"
   },
   {
-    id: "sierra_nevada_pale_ale",
-    displayName: "Sierra Nevada Pale Ale",
-    aliases: ["sierra nevada pale"],
-    category: "pale ale",
-    defaultAbv: 5.6,
-    commonContainers: beerContainers,
+    id: "new_belgium_voodoo_ranger_imperial_ipa",
+    displayName: "New Belgium Voodoo Ranger Imperial IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "double IPA",
+    defaultAbv: 9,
+    commonContainers: [{ volume: 12, unit: "oz" }, { volume: 19.2, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Sierra Nevada listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://untappd.com/shop/items/10670"
   },
   {
-    id: "sierra_nevada_hazy_little_thing",
-    displayName: "Sierra Nevada Hazy Little Thing",
-    aliases: ["hazy little thing"],
-    category: "IPA",
-    defaultAbv: 6.7,
-    commonContainers: beerContainers,
-    abvSource: "product directory",
-    notes: "Starter ABV from Sierra Nevada listing. Verify package label."
-  },
-  {
-    id: "sierra_nevada_torpedo",
-    displayName: "Sierra Nevada Torpedo",
-    aliases: ["torpedo", "torpedo ipa"],
-    category: "IPA",
-    defaultAbv: 7.2,
-    commonContainers: beerContainers,
-    abvSource: "product directory",
-    notes: "Starter ABV from Sierra Nevada listing. Verify package label."
-  },
-  {
-    id: "oskar_blues_dales_pale_ale",
+    id: "oskar_blues_dale_s_pale_ale",
     displayName: "Oskar Blues Dale's Pale Ale",
-    aliases: ["dale's", "dales pale ale"],
-    category: "pale ale",
+    aliases: [],
+    category: "wnc-craft",
+    style: "pale ale",
     defaultAbv: 6.5,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Oskar Blues listing. Verify package label."
+    notes: "Brewed at the Brevard, NC brewery. Verify package label when possible.",
+    sourceUrl: "https://oskarblues.com/beer/dales-pale/"
   },
   {
-    id: "oskar_blues_mamas_yella_pils",
+    id: "oskar_blues_mama_s_little_yella_pils",
     displayName: "Oskar Blues Mama's Little Yella Pils",
-    aliases: ["mama's little yella pils", "mamas little yella pils"],
-    category: "pilsner",
+    aliases: [],
+    category: "wnc-craft",
+    style: "pilsner",
     defaultAbv: 4.7,
-    commonContainers: beerContainers,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Oskar Blues listing. Verify package label."
+    notes: "Verify package label when possible.",
+    sourceUrl: "https://untappd.com/b/oskar-blues-brewery-mama-s-little-yella-pils/5210"
   },
   {
-    id: "oskar_blues_old_chub",
-    displayName: "Oskar Blues Old Chub",
-    aliases: ["old chub"],
-    category: "scotch ale",
-    defaultAbv: 8,
-    commonContainers: beerContainers,
+    id: "bold_rock_hard_cider_apple",
+    displayName: "Bold Rock Hard Cider - Apple",
+    aliases: [],
+    category: "wnc-craft",
+    style: "hard cider",
+    defaultAbv: 4.7,
+    commonContainers: [{ volume: 12, unit: "oz" }],
     abvSource: "product directory",
-    notes: "Starter ABV from Oskar Blues listing. Verify package label."
+    notes: "Cider (Mills River, NC). Verify package label when possible.",
+    sourceUrl: "https://boldrock.com/our-ciders/"
+  },
+  {
+    id: "bold_rock_hard_cider_ipa",
+    displayName: "Bold Rock Hard Cider - IPA",
+    aliases: [],
+    category: "wnc-craft",
+    style: "hard cider",
+    defaultAbv: 4.7,
+    commonContainers: [{ volume: 12, unit: "oz" }],
+    abvSource: "product directory",
+    notes: "Cider (Mills River, NC). Verify package label when possible.",
+    sourceUrl: "https://boldrock.com/our-ciders/"
   }
 ];
+
+export function beveragesByCategory(category: BeverageCategory): BeverageEntry[] {
+  return beverages.filter((entry) => entry.category === category);
+}
 
 export function findBeverage(query: string): BeverageEntry | undefined {
   const normalized = query.trim().toLowerCase();
   if (!normalized) {
     return undefined;
   }
-
   return beverages.find(
     (entry) =>
       entry.displayName.toLowerCase() === normalized ||
       entry.aliases.some((alias) => alias.toLowerCase() === normalized)
   );
+}
+
+export function searchBeverages(query: string, limit = 12): BeverageEntry[] {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized) {
+    return [];
+  }
+  const scored = beverages
+    .map((entry) => {
+      const name = entry.displayName.toLowerCase();
+      const aliasHit = entry.aliases.some((a) => a.includes(normalized));
+      let score = -1;
+      if (name.startsWith(normalized)) score = 3;
+      else if (name.includes(normalized)) score = 2;
+      else if (aliasHit) score = 1;
+      else if ((entry.style ?? '').toLowerCase().includes(normalized)) score = 0;
+      return { entry, score };
+    })
+    .filter((row) => row.score >= 0)
+    .sort((a, b) => b.score - a.score || a.entry.displayName.localeCompare(b.entry.displayName));
+  return scored.slice(0, limit).map((row) => row.entry);
 }
