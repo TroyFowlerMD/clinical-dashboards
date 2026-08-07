@@ -4,6 +4,11 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-08-07 - Codex - Shared feedback platform pilot
+- Completed: Replaced JFK's active FormSubmit loader with the shared feedback-widget loader for all five JFK pages.
+- In progress: Publishing and live verification of the central service and protected schedule pilot wiring.
+- Blockers/notes: The protected schedule directory check remains blocked by its known stale generated Psych directory block; feedback server syntax passed.
+
 ## Entry Format
 
     ### YYYY-MM-DD - [machine/profile] - [session summary]

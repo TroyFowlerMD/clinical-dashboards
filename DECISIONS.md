@@ -4,6 +4,12 @@ This file records durable architectural, workflow, safety, and publishing decisi
 
 ---
 
+### 2026-08-07 - Use The Shared Website Feedback Widget
+Context: JFK feedback used a duplicated FormSubmit-only client, while schedule apps had separate GitHub-issue attachment code.
+Decision: JFK and protected schedule pilot pages use the versioned widget served by the private `website-feedback` project; ticket identity and routing remain centrally cataloged there.
+Rationale: One client prevents feedback fixes from drifting across repositories while preserving each site’s current hosting.
+Consequences: A page must be registered and pass the fleet audit before it is considered managed; the GitHub Pages deployment remains unchanged.
+
 ### 2026-07-07 - Alcohol Calculator Prebuilt-Drink Data Model And Input UX
 Context: The standard drink calculator previously used a small (~40 entry) beverage list with a datalist and numeric inputs that forced a stuck 0 when cleared. User requested a large curated drink directory (~100+ products including Western NC packaged craft flagships), auto-filled fixed variables, and better volume entry.
 Decision: (1) Store beverages as source-verified entries with `category`, `style`, `abvOptions[]`, `containers[]`, and `sourceUrl`, generated deterministically via `gen_beverages.py` into `data/beverages.ts`. (2) Model multi-ABV products (e.g. Four Loko, Everclear, MD 20/20) as adjacent selectable-and-editable variants defaulted to NC retail values, not silently merged. (3) UI uses a Category -> Product cascade plus a type-ahead "Search all drinks" field; selecting a product auto-fills fixed variables and leaves only non-fixed choices (size, ABV variant) selectable. (4) Volume is a dropdown of product/category presets with human nicknames ("750 mL (fifth)", "1.75 L (handle)") plus a "Custom..." oz/mL/L entry. (5) Quantity/Volume/ABV are `number | ""` so they can be truly empty; blank rows contribute 0 and skip validation.

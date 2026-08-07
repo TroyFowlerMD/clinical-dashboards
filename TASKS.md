@@ -7,7 +7,7 @@
 - [!] Blocked - include reason in parentheses
 
 ## Active Tasks
-- [!] Repair JFK feedback submission flow (paused because Google sign-in blocked Apps Script deployment URL updates; must decide whether active script is `feedback-submit.js` or `feedback.js`).
+- [~] Migrate JFK feedback to the shared GitHub-issue widget; central pilot wiring is in progress and needs live verification after publication.
 
 ## Upcoming
 - [ ] Decide whether to update `feedback-submit.js` or wire JFK pages to `feedback.js`.
