@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'workflows-v1-2026-07-07';
+const CACHE_VERSION = 'workflows-v1-2026-08-07-feedback-widget';
 const CACHE_NAME = `jfk-workflows-${CACHE_VERSION}`;
 const BASE_URL = new URL('./', self.registration.scope);
 const OFFLINE_FALLBACK = new URL('workflows.html', BASE_URL).toString();
