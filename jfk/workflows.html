@@ -1083,6 +1083,17 @@
           <div class="wf-category">
             <div class="wf-category-header">Treatment Plan</div>
 
+            <div class="wf-item" id="item-close-treatment-plans">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Close Treatment Plans complete">
+                <span class="wf-item-title">Close Treatment Plans</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Close the <strong>psych goals</strong> in the Treatment Plan. Mark each psych goal <strong>"Completed"</strong> if the goal has been met, or <strong>"Adequate for Discharge"</strong> if the goal has not yet been met but is adequate to close at discharge.</p>
+              </div>
+            </div>
+
             <div class="wf-item" id="item-dc-treatment-plan">
               <div class="wf-item-header" onclick="toggleItem(this)">
                 <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Treatment Plan complete">
@@ -1090,10 +1101,10 @@
                 <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="wf-item-body">
-                <p>Treatment Plan tab → Document Progress → Resolve Plan. Goal closure guidance:</p>
+                <p>Treatment Plan tab → Document Progress → Resolve Plan. For the <strong>psych goals</strong>, use the following closure guidance:</p>
                 <ul>
-                  <li><strong>"Adequate for Discharge"</strong> — the patient has achieved the goal (e.g., detox complete or symptoms minimal)</li>
-                  <li><strong>"Completed"</strong> — we are no longer managing that goal because they are leaving our care. The treatment episode is complete. This does not imply the goal was fully achieved.</li>
+                  <li><strong>"Completed"</strong> — the psych goal has been met.</li>
+                  <li><strong>"Adequate for Discharge"</strong> — the psych goal has not yet been met, but the current status is adequate for discharge.</li>
                   <li>If a patient is leaving with minimal progress and the problem remains tenuous (e.g., leaving against advice at the peak of withdrawal), document a brief note describing the situation. That note type is found in Treatment Plan tab → Summary and Note.</li>
                 </ul>
               </div>
