@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'workflows-v1-2026-08-07-feedback-widget';
+const CACHE_VERSION = 'workflows-v2-2026-08-11-network-refresh';
 const CACHE_NAME = `jfk-workflows-${CACHE_VERSION}`;
 const BASE_URL = new URL('./', self.registration.scope);
 const OFFLINE_FALLBACK = new URL('workflows.html', BASE_URL).toString();
@@ -44,7 +44,21 @@ self.addEventListener('fetch', (event) => {
 
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request).catch(() => caches.match(OFFLINE_FALLBACK))
+      fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const responseClone = networkResponse.clone();
+            event.waitUntil(
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone))
+            );
+          }
+          return networkResponse;
+        })
+        .catch(() =>
+          caches.match(request).then((cachedResponse) =>
+            cachedResponse || caches.match(OFFLINE_FALLBACK)
+          )
+        )
     );
     return;
   }
