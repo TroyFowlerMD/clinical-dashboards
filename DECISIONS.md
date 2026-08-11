@@ -2,6 +2,12 @@
 
 This file records durable architectural, workflow, safety, and publishing decisions for Clinical Dashboards. Each entry should include Context, Decision, Rationale, and Consequences.
 
+### 2026-08-11 - Psych Goal Closure Labels At Discharge
+Context: The JFK discharge workflow needed a dedicated reminder for closing psychiatric treatment-plan goals.
+Decision: Add a "Close Treatment Plans" checklist item scoped to psych goals. Use "Completed" when a goal has been met and "Adequate for Discharge" when it has not been met but is acceptable to close at discharge.
+Rationale: Makes the intended Epic closure choices explicit and prevents the generic treatment-plan reminder from being interpreted inconsistently.
+Consequences: Future edits to the JFK discharge workflow should preserve this distinction and wording unless the clinical workflow changes.
+
 ---
 
 ### 2026-08-07 - Use The Shared Website Feedback Widget
