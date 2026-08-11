@@ -4,6 +4,11 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-08-11 - Codex - JFK feedback automation marker
+- Completed: Added the authorized non-visible website-feedback automation marker immediately before the JFK workflows service-worker registration.
+- In progress: No follow-up implementation work; production confirmation should verify the deployed source contains the marker without visible-page changes.
+- Blockers/notes: Local ticket file remains untracked for the workflow that owns ticket handling.
+
 ### 2026-08-11 - Codex - JFK offline cache reliability and review follow-up
 - Completed: Bumped the JFK workflows cache release, changed successful online navigations to refresh the saved offline copy, and retained cached fallback behavior when offline.
 - Completed: Added a Node-based service-worker behavior check and a GitHub Actions guard for JFK changes.
