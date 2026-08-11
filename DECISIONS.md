@@ -2,6 +2,20 @@
 
 This file records durable architectural, workflow, safety, and publishing decisions for Clinical Dashboards. Each entry should include Context, Decision, Rationale, and Consequences.
 
+### 2026-08-11 - Refresh The JFK Offline Workflow Copy After Online Loads
+Context: `jfk/workflows.html` is precached for offline use, but successful online navigation did not replace that saved copy. Installed devices could therefore retain older clinical instructions after the live page changed.
+Decision: Use a network-first navigation strategy that saves each successful same-origin page response for later offline use. Bump the JFK workflows cache version for this release and enforce the behavior with an automated service-worker test on JFK changes.
+Rationale: Users should receive current content when online and the newest content they previously loaded when offline, without relying on a manual cache clear or a remembered version bump for every HTML edit.
+Consequences: Future JFK service-worker changes must preserve the online-refresh and offline-fallback test. Devices must reconnect at least once to receive newly published content.
+
+### 2026-08-11 - Clarify JFK Discharge Safety And Closure Guidance
+Context: Website-feedback issue #43 identified ambiguity in the discharge C-SSRS, principal-diagnosis, and treatment-plan reminders.
+Decision: State that when no suicidality occurred during the admission, C-SSRS questions 1, 2, and 6 are answered "No" and the others may remain blank; when the screener is positive, document why the patient is adequately safe at discharge. Also require an SUD principal diagnosis and consolidate the treatment-plan reminder under "Close Treatment Plans."
+Rationale: The explicit wording makes the intended JFK Epic discharge workflow easier to follow consistently and preserves the safety-documentation expectation.
+Consequences: Future clinical-content edits should preserve this intent unless Troy explicitly approves a revised workflow, and the rationale for any revision should be recorded here.
+
+---
+
 ### 2026-08-11 - Psych Goal Closure Labels At Discharge
 Context: The JFK discharge workflow needed a dedicated reminder for closing psychiatric treatment-plan goals.
 Decision: Add a "Close Treatment Plans" checklist item scoped to psych goals. Use "Completed" when a goal has been met and "Adequate for Discharge" when it has not been met but is acceptable to close at discharge.

@@ -4,6 +4,12 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-08-11 - Codex - JFK offline cache reliability and review follow-up
+- Completed: Bumped the JFK workflows cache release, changed successful online navigations to refresh the saved offline copy, and retained cached fallback behavior when offline.
+- Completed: Added a Node-based service-worker behavior check and a GitHub Actions guard for JFK changes.
+- Completed: Recorded the discharge-workflow rationale requested by the Codex review in DECISIONS.md.
+- Blockers/notes: Repository publication, GitHub check verification, and live service-worker verification are completed later in this session.
+
 ### 2026-08-11 - Codex - JFK expanded sub-topic card contrast
 - Completed: Restored the original darker background for expanded nested workflow cards (for example, Problem List and Allergies), while retaining the lighter expanded main workflow body.
 - Blockers/notes: Narrow visual correction only; no clinical workflow content changed.
