@@ -2,10 +2,6 @@ name: JFK PWA cache guard
 
 on:
   pull_request:
-    paths:
-      - 'jfk/**'
-      - 'scripts/check-jfk-pwa-cache.mjs'
-      - '.github/workflows/jfk-pwa-cache-guard.yml'
   push:
     branches: [main]
     paths:
