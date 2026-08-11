@@ -4,6 +4,12 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-08-11 - Codex - Dashboard workflow and card-label updates
+- Completed: Added a separate "Close Treatment Plans" checkbox to the JFK discharge workflow, explicitly scoped to psych goals with "Completed" for met goals and "Adequate for Discharge" for unmet goals acceptable for discharge.
+- Completed: Reordered the JFK landing page so the MOUD Prescriber Guide is second below Psychiatry Epic Workflows and removed the large JFK landing hero for a minimalist dashboard.
+- Completed: Simplified all TroyMD dashboard cards to show linked page titles without descriptor or URL text.
+- Blockers/notes: Published directly to the authorized default branches; live hosting verification remains dependent on the connected hosting deployment status.
+
 ### 2026-08-07 - Codex - Shared feedback platform pilot
 - Completed: Replaced JFK's active FormSubmit loader with the shared feedback-widget loader for all five JFK pages.
 - In progress: Publishing and live verification of the central service and protected schedule pilot wiring.
