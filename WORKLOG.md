@@ -4,6 +4,11 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-08-11 - Codex - JFK Epic Workflows issue #43
+- Completed: Made expanded workflow bodies, nested cards, and collapsible categories visually distinct with lighter-gray shading.
+- Completed: Clarified the discharge C-SSRS instructions, added the SUD principal-diagnosis reminder, and consolidated the treatment-plan guidance under "Close Treatment Plans."
+- Blockers/notes: No architectural decision was introduced; publication and live GitHub Pages verification are included in this session.
+
 ### 2026-08-11 - Codex - Dashboard workflow and card-label updates
 - Completed: Added a separate "Close Treatment Plans" checkbox to the JFK discharge workflow, explicitly scoped to psych goals with "Completed" for met goals and "Adequate for Discharge" for unmet goals acceptable for discharge.
 - Completed: Reordered the JFK landing page so the MOUD Prescriber Guide is second below Psychiatry Epic Workflows and removed the large JFK landing hero for a minimalist dashboard.
