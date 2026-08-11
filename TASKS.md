@@ -17,6 +17,7 @@
 - [ ] Decide whether `asam-app/` needs a deployable public entry point or should remain excluded from the public Pages clinical hub.
 
 ## Completed (last 30 days)
+- [x] Restored the darker original surface for expanded JFK workflow sub-topic cards while keeping expanded main workflow bodies lighter (2026-08-11).
 - [x] Resolved website-feedback issue #43 for JFK Epic Workflows: clarified expanded-card shading and updated the discharge C-SSRS, principal-diagnosis, and treatment-plan instructions (2026-08-11).
 - [x] Added the JFK discharge-workflow "Close Treatment Plans" checklist for psych-goal closure, reordered the JFK landing links, removed the large JFK landing hero, and simplified TroyMD dashboard cards to linked titles (2026-08-11).
 - [~] Alcohol calculator prebuilt-drinks + UX overhaul (119 products, category cascade + type-ahead search, volume dropdown w/ nicknames + custom entry, empty-by-default numeric fields, multi-ABV variants). Built + tested; awaiting commit/push approval.

@@ -4,6 +4,10 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-08-11 - Codex - JFK expanded sub-topic card contrast
+- Completed: Restored the original darker background for expanded nested workflow cards (for example, Problem List and Allergies), while retaining the lighter expanded main workflow body.
+- Blockers/notes: Narrow visual correction only; no clinical workflow content changed.
+
 ### 2026-08-11 - Codex - JFK Epic Workflows issue #43
 - Completed: Made expanded workflow bodies, nested cards, and collapsible categories visually distinct with lighter-gray shading.
 - Completed: Clarified the discharge C-SSRS instructions, added the SUD principal-diagnosis reminder, and consolidated the treatment-plan guidance under "Close Treatment Plans."
