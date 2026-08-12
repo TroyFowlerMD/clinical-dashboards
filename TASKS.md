@@ -17,6 +17,7 @@
 - [ ] Decide whether `asam-app/` needs a deployable public entry point or should remain excluded from the public Pages clinical hub.
 
 ## Completed (last 30 days)
+- [x] Resolved website-feedback issue #61: moved the IVC Hub entry from the JFK landing page to the root TroyMD hub and converted the root hub to compact icon tiles optimized for mobile (2026-08-12).
 - [x] Made the JFK workflow PWA refresh its saved offline page after successful online loads and added an automated cache-behavior guard (2026-08-11).
 - [x] Restored the darker original surface for expanded JFK workflow sub-topic cards while keeping expanded main workflow bodies lighter (2026-08-11).
 - [x] Resolved website-feedback issue #43 for JFK Epic Workflows: clarified expanded-card shading and updated the discharge C-SSRS, principal-diagnosis, and treatment-plan instructions (2026-08-11).
