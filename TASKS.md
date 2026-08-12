@@ -8,6 +8,7 @@
 
 ## Active Tasks
 - [~] Migrate JFK feedback to the shared GitHub-issue widget; central pilot wiring is in progress and needs live verification after publication.
+- [~] Add card-specific feedback entry points to the JFK MOUD Prescriber Guide; awaiting publication and live shared-widget verification.
 
 ## Upcoming
 - [ ] Decide whether to update `feedback-submit.js` or wire JFK pages to `feedback.js`.

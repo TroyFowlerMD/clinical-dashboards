@@ -191,8 +191,9 @@
     .feedback-submit:disabled { opacity: 0.5; cursor: not-allowed; }
     .feedback-success { display: none; background-color: var(--teal-bg); border: 1px solid var(--teal-border); color: var(--teal); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); font-size: var(--text-sm); margin-top: var(--space-3); }
     .feedback-success.visible { display: block; }
+    .card-feedback { margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--border); }
     @media (max-width: 599px) { .feedback-box { padding: var(--space-4); } }
-    @media print { .feedback-box { display: none; } }
+    @media print { .feedback-box, .card-feedback { display: none; } }
   </style>
 </head>
 <body>
@@ -256,7 +257,7 @@
 
 
     <!-- Suboxone vs Subutex -->
-    <div class="protocol-card" data-searchable="suboxone subutex buprenorphine naloxone monoproduct pregnancy pregnant microdosing OTP OBOT formulation">
+    <div class="protocol-card" data-feedback-area="moud.html:suboxone-vs-subutex" data-searchable="suboxone subutex buprenorphine naloxone monoproduct pregnancy pregnant microdosing OTP OBOT formulation">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Suboxone vs Subutex</div>
@@ -280,7 +281,7 @@
 
 
     <!-- Buprenorphine Induction — In Marked Withdrawal -->
-    <div class="protocol-card" data-searchable="buprenorphine induction withdrawal normodosing COWS fentanyl heroin methadone opioid short-acting precipitated timing first dose day 1 day 2 maintenance 16 mg">
+    <div class="protocol-card" data-feedback-area="moud.html:buprenorphine-induction-marked-withdrawal" data-searchable="buprenorphine induction withdrawal normodosing COWS fentanyl heroin methadone opioid short-acting precipitated timing first dose day 1 day 2 maintenance 16 mg">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Buprenorphine Induction — In Marked Withdrawal</div>
@@ -354,7 +355,7 @@
 
 
     <!-- Buprenorphine Abstinent Induction -->
-    <div class="protocol-card" data-searchable="buprenorphine abstinent induction not withdrawal tolerant 2 mg sublingual SL">
+    <div class="protocol-card" data-feedback-area="moud.html:buprenorphine-abstinent-induction" data-searchable="buprenorphine abstinent induction not withdrawal tolerant 2 mg sublingual SL">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Buprenorphine Abstinent Induction</div>
@@ -373,7 +374,7 @@
 
 
     <!-- Missed Buprenorphine Doses -->
-    <div class="protocol-card" data-searchable="missed buprenorphine doses resume half dose re-induce">
+    <div class="protocol-card" data-feedback-area="moud.html:missed-buprenorphine-doses" data-searchable="missed buprenorphine doses resume half dose re-induce">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Missed Buprenorphine Doses</div>
@@ -415,7 +416,7 @@
 
 
     <!-- Sublocade -->
-    <div class="protocol-card" data-searchable="sublocade injectable buprenorphine subcutaneous 300 mg 100 mg monthly pharmacy Kathleen Parks Patil Cruz Medicaid">
+    <div class="protocol-card" data-feedback-area="moud.html:sublocade-injectable-buprenorphine" data-searchable="sublocade injectable buprenorphine subcutaneous 300 mg 100 mg monthly pharmacy Kathleen Parks Patil Cruz Medicaid">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Sublocade (Injectable Buprenorphine)</div>
@@ -459,7 +460,7 @@
 
 
     <!-- Methadone Induction -->
-    <div class="protocol-card" data-searchable="methadone induction initial dose 10 mg 20 mg 30 mg 40 mg withdrawal titration sedation respiratory QTc COWS MOUD consent">
+    <div class="protocol-card" data-feedback-area="moud.html:methadone-induction" data-searchable="methadone induction initial dose 10 mg 20 mg 30 mg 40 mg withdrawal titration sedation respiratory QTc COWS MOUD consent">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Methadone Induction</div>
@@ -518,7 +519,7 @@
 
 
     <!-- Methadone Abstinent Induction -->
-    <div class="protocol-card" data-searchable="methadone abstinent induction 5 mg 10 mg not tolerant sedation respiratory steady state">
+    <div class="protocol-card" data-feedback-area="moud.html:methadone-abstinent-induction" data-searchable="methadone abstinent induction 5 mg 10 mg not tolerant sedation respiratory steady state">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Methadone Abstinent Induction</div>
@@ -544,7 +545,7 @@
 
 
     <!-- Other Methadone Dosing Considerations -->
-    <div class="protocol-card" data-searchable="methadone other dosing considerations replacing vomited doses emesis vomiting witnessed dose replacement COWS">
+    <div class="protocol-card" data-feedback-area="moud.html:other-methadone-dosing-considerations" data-searchable="methadone other dosing considerations replacing vomited doses emesis vomiting witnessed dose replacement COWS">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Other Dosing Considerations</div>
@@ -567,7 +568,7 @@
 
 
     <!-- Drug Interactions -->
-    <div class="protocol-card" data-searchable="drug interactions fluconazole diflucan methadone levels phenobarbital metabolism withdrawal benzodiazepine alcohol benzo">
+    <div class="protocol-card" data-feedback-area="moud.html:drug-interactions" data-searchable="drug interactions fluconazole diflucan methadone levels phenobarbital metabolism withdrawal benzodiazepine alcohol benzo">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Drug Interactions</div>
@@ -598,7 +599,7 @@
 
 
     <!-- Missed Methadone Doses -->
-    <div class="protocol-card" data-searchable="missed methadone doses 66% 50% re-induce resume">
+    <div class="protocol-card" data-feedback-area="moud.html:missed-methadone-doses" data-searchable="missed methadone doses 66% 50% re-induce resume">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Missed Methadone Doses</div>
@@ -644,7 +645,7 @@
 
 
     <!-- Weaning Methadone or Transitioning to Buprenorphine -->
-    <div class="protocol-card" data-searchable="weaning methadone transition buprenorphine wean taper 30 40 mg precipitated withdrawal 48 72 hours BUP switch">
+    <div class="protocol-card" data-feedback-area="moud.html:weaning-methadone-transitioning-buprenorphine" data-searchable="weaning methadone transition buprenorphine wean taper 30 40 mg precipitated withdrawal 48 72 hours BUP switch">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Weaning Methadone or Transitioning to Buprenorphine</div>
@@ -672,7 +673,7 @@
 
 
     <!-- Microdosing Protocol: Methadone → Buprenorphine Transition -->
-    <div class="protocol-card" data-searchable="microdosing protocol methadone buprenorphine transition Subutex 0.5 mg BID full dose day 1 2 3 4 5 6 7">
+    <div class="protocol-card" data-feedback-area="moud.html:microdosing-methadone-buprenorphine-transition" data-searchable="microdosing protocol methadone buprenorphine transition Subutex 0.5 mg BID full dose day 1 2 3 4 5 6 7">
       <div class="protocol-header" role="button" tabindex="0" aria-expanded="false">
         <div class="protocol-header-text">
           <div class="protocol-header-title">Microdosing Protocol: Methadone → Buprenorphine</div>

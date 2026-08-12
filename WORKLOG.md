@@ -4,6 +4,11 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-08-12 - Codex - JFK MOUD card-specific feedback
+- Completed: Added a shared-widget feedback entry point to the bottom of each MOUD protocol card, using page-qualified card-area tags so submitted feedback retains its originating card.
+- In progress: Awaiting normal workflow publication and live verification of the centrally hosted widget's modal and routing behavior.
+- Blockers/notes: The central widget host could not be resolved from this environment, so browser-level widget interaction cannot be verified locally; static source checks cover the local integration.
+
 ### 2026-08-12 - Codex - JFK IVC hub placement and root-hub mobile layout
 - Completed: Removed the IVC Hub entry from the JFK landing page, retained the same destination from a new root-hub IVC tile, and changed the root dashboard links to compact icon tiles with a two-column phone layout.
 - In progress: Awaiting normal workflow review, commit, publication, and production verification.
