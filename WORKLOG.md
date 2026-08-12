@@ -4,6 +4,11 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-08-12 - Codex - JFK IVC hub placement and root-hub mobile layout
+- Completed: Removed the IVC Hub entry from the JFK landing page, retained the same destination from a new root-hub IVC tile, and changed the root dashboard links to compact icon tiles with a two-column phone layout.
+- In progress: Awaiting normal workflow review, commit, publication, and production verification.
+- Blockers/notes: `git diff --check` and static source assertions passed. Local HTTP rendering could not run because this environment denies socket binding (`PermissionError: [Errno 1] Operation not permitted`).
+
 ### 2026-08-11 - Codex - JFK feedback automation marker
 - Completed: Added the authorized non-visible website-feedback automation marker immediately before the JFK workflows service-worker registration.
 - In progress: No follow-up implementation work; production confirmation should verify the deployed source contains the marker without visible-page changes.

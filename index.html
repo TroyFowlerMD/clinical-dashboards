@@ -26,7 +26,7 @@ radial-gradient(circle at top left, rgba(82,166,163,0.10), transparent 24%),
 linear-gradient(180deg, #091018 0%, var(--bg) 100%);
 color:var(--text)}
 body{padding:28px 16px 42px}
-.shell{max-width:1120px;margin:0 auto}
+.shell{max-width:960px;margin:0 auto}
 .hero{display:grid;grid-template-columns:1.2fr .9fr;gap:18px;margin-bottom:20px}
 .panel{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow)}
 .hero-copy{padding:28px}
@@ -39,25 +39,18 @@ h1{margin:0 0 12px;font-size:clamp(2rem,5vw,3.5rem);line-height:1.02}
 .note{padding:12px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.03)}
 .note strong{display:block;margin-bottom:4px}
 .note span{font-size:12px;color:var(--muted);line-height:1.45}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.card{display:block;padding:18px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));text-decoration:none;color:inherit;transition:transform .16s ease,border-color .16s ease,background .16s ease}
-.card:hover{transform:translateY(-2px)}
-.card.asam-app:hover{border-color:rgba(90,160,214,0.45);background:rgba(90,160,214,0.08)}
-.card.asam-classic:hover{border-color:rgba(208,160,75,0.45);background:rgba(208,160,75,0.08)}
-.card.jfk:hover{border-color:rgba(82,166,163,0.45);background:rgba(82,166,163,0.08)}
-.card.alcohol:hover{border-color:rgba(142,120,214,0.45);background:rgba(142,120,214,0.08)}
-.badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:12px}
-.asam-app .badge{background:rgba(90,160,214,0.14);color:#8ec3ea}
-.asam-classic .badge{background:rgba(208,160,75,0.14);color:#efc27b}
-.jfk .badge{background:rgba(82,166,163,0.14);color:#8ad2cf}
-.alcohol .badge{background:rgba(142,120,214,0.14);color:#b8a8f0}
-.card h2{margin:0 0 8px;font-size:1.25rem}
-.card p{margin:0 0 12px;color:var(--muted);line-height:1.55}
-.meta{display:flex;gap:8px;flex-wrap:wrap}
-.pill{font-size:11px;font-weight:700;padding:5px 8px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{display:flex;min-height:172px;padding:16px 12px;align-items:center;justify-content:center;flex-direction:column;border:1px solid var(--border);border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));text-align:center;text-decoration:none;color:inherit;transition:transform .16s ease,border-color .16s ease,background .16s ease,box-shadow .16s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,0.18)}
+.card:focus-visible{outline:3px solid var(--card-color);outline-offset:3px}
+.card-icon{display:grid;place-items:center;width:58px;height:58px;margin-bottom:12px;border:1px solid color-mix(in srgb,var(--card-color) 42%,transparent);border-radius:18px;background:color-mix(in srgb,var(--card-color) 15%,transparent);color:var(--card-color)}
+.card-icon svg{width:30px;height:30px}
+.card h2{margin:0;font-size:1rem;line-height:1.25}
+.asam-classic{--card-color:#efc27b}.jfk{--card-color:#8ad2cf}.alcohol{--card-color:#b8a8f0}.ivc{--card-color:#8ec3ea}
+.card:hover{border-color:color-mix(in srgb,var(--card-color) 55%,var(--border));background:color-mix(in srgb,var(--card-color) 9%,var(--panel))}
 .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:12px}
 @media (max-width:820px){.hero{grid-template-columns:1fr}}
-@media (max-width:620px){body{padding:20px 12px 34px}.panel{border-radius:18px}.hero-copy,.hero-notes{padding:20px}}
+@media (max-width:620px){body{padding:16px 12px 28px}.panel{border-radius:18px}.hero-copy,.hero-notes{padding:18px}.hero{gap:14px;margin-bottom:14px}.hero-notes{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{min-height:144px;padding:12px 8px;border-radius:18px}.card-icon{width:52px;height:52px;margin-bottom:10px;border-radius:16px}.card-icon svg{width:27px;height:27px}.card h2{font-size:.9rem}}
 </style>
 </head>
 <body>
@@ -80,34 +73,31 @@ h1{margin:0 0 12px;font-size:clamp(2rem,5vw,3.5rem);line-height:1.02}
 
     <section class="grid" aria-label="Clinical dashboards">
       <a class="card asam-classic" href="asam-classic/dashboard.html">
-        <div class="badge">ASAM Reference</div>
-        <h2>ASAM Classic</h2>
-        <p>Fast single-page ASAM dashboard for quick clinical reference.</p>
-        <div class="meta">
-          <span class="pill">Single HTML page</span>
-          <span class="pill">Quick reference</span>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/></svg>
         </div>
+        <h2>ASAM Classic</h2>
       </a>
 
       <a class="card jfk" href="jfk/index.html">
-        <div class="badge">JFK Dashboard</div>
-        <h2>JFK Clinical Dashboard</h2>
-        <p>Multi-page dashboard for psychiatry workflows, detox protocols, MOUD guidance, and staff reference material.</p>
-        <div class="meta">
-          <span class="pill">Multi-page static site</span>
-          <span class="pill">Protocols + workflows</span>
-          <span class="pill">MOUD guide</span>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 3h3v15H5V6h3l1-3Z"/><path d="M9 13l2 2 4-4"/></svg>
         </div>
+        <h2>JFK Clinical Dashboard</h2>
       </a>
 
       <a class="card alcohol" href="alcohol-calculators/">
-        <div class="badge">Alcohol Calculators</div>
-        <h2>Clinical Alcohol Calculators</h2>
-        <p>Calculate U.S. standard drinks and estimate BAL decline after a measured lab value.</p>
-        <div class="meta">
-          <span class="pill">Mobile web app</span>
-          <span class="pill">Educational estimates</span>
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8M9 3v6l-4 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-4-9V3"/><path d="M8 15h8"/></svg>
         </div>
+        <h2>Clinical Alcohol Calculators</h2>
+      </a>
+
+      <a class="card ivc" href="jfk/ivc.html">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 3h3v15H5V6h3l1-3Z"/><path d="M8 13h8M8 17h5"/></svg>
+        </div>
+        <h2>IVC Hub</h2>
       </a>
     </section>
 
