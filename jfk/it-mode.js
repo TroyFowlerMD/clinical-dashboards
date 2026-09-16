@@ -121,8 +121,14 @@
     var name = root.querySelector('[data-name]');
     if (name) {
       name.value = 'troymd';
+      name.required = false;
+      name.style.display = 'none';
       var label = name.closest('label');
-      if (label) label.hidden = true;
+      if (label) {
+        label.hidden = true;
+        label.style.display = 'none';
+        label.setAttribute('aria-hidden', 'true');
+      }
     }
     var message = root.querySelector('[data-message]');
     if (message) message.placeholder = 'Describe the requested change for: ' + context + '. You can paste screenshots here.';
