@@ -82,3 +82,9 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Read full issue bodies and all comments; no screenshots were attached. Reviewed #97, #98, #117, and #118 as diagnostic/test-only submissions with no requested implementation; left them open.
 - In progress: Publication and live browser verification; actionable issues remain open until confirmed live.
 - Blockers/notes: git diff --check and node scripts/check-jfk-pwa-cache.mjs pass. Existing network-first HTML caching refreshes the offline copy, so no service-worker change is needed. A trial cache-version bump hit the release-pinned assertion and was reverted before the passing check.
+
+### 2026-09-16 - ChatGPT Work - JFK ticket publication receipt
+- Completed: PR #29 merged as cef4a6530ab42b844408e7abf292d3cbb65ae998. GitHub Pages deployment https://github.com/TroyFowlerMD/clinical-dashboards/actions/runs/35159505734 succeeded.
+- Completed: Live browser verification at https://troyfowlermd.github.io/clinical-dashboards/jfk/workflows.html confirmed all five edits, expanded the new Psych History + card, exercised its checkbox, and opened Problem List and Admission Denial > Note to inspect the full instructions. Closed #104 and #132–135 only afterward, with evidence comments. Reviewed and commented on #97, #98, #117, #118; these stay open because they request no change.
+- Completed: git diff --check, node scripts/check-jfk-pwa-cache.mjs, and required GitHub cache checks passed. DECISIONS.md unchanged: no new architecture or publishing policy.
+- Blockers/notes: Shell push lacked credentials; used the GitHub connector. Main branch protections required a PR and passing cache check, which were honored. Protected Worker browser navigation was blocked by automatic approval review at its Google sign-in redirect; authenticated proxy verification remains unconfirmed. Public live dashboard verification succeeded.
