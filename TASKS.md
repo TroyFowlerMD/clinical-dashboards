@@ -7,6 +7,7 @@
 - [!] Blocked - include reason in parentheses
 
 ## Active Tasks
+- [~] Publish and verify authorized JFK workflow edits for website-feedback #104 and #132–135; #97, #98, #117, #118 contain test-only text and no requested change.
 - [~] Migrate JFK feedback to the shared GitHub-issue widget; central pilot wiring is in progress and needs live verification after publication.
 - [!] Finish JFK IT Mode Cloudflare Access rollout (repository UI is implemented; blocked on configuring Troy's non-COCM Cloudflare account, protected admin hostname, Google IdP, and exact-email Access policy).
 
