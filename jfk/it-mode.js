@@ -11,6 +11,7 @@
   var CODEX_PROMPT = 'Review the GitHub issues submitted today from IT Mode. Implement each requested change, verify the live webpage deployment, and close each issue only after the change is confirmed live.';
   var enabled = false;
   var entries = [];
+  var pageObserver = null;
 
   function injectStyles() {
     if (document.getElementById('jfk-it-mode-styles')) return;
@@ -68,10 +69,7 @@
   function addWorkflowButtons() { document.querySelectorAll('.workflow-phase').forEach(function (phase) { var header = phase.querySelector(':scope > .workflow-phase-header'); addRequestButton(header, workflowContext(phase), header && header.querySelector('.workflow-phase-chevron')); }); document.querySelectorAll('.wf-item').forEach(function (item) { var header = item.querySelector(':scope > .wf-item-header'); addRequestButton(header, workflowContext(item), header && header.querySelector('.wf-item-chevron')); }); }
   function addMoudButtons() { document.querySelectorAll('.protocol-card').forEach(function (card, index) { var header = card.querySelector(':scope > .protocol-header'); addRequestButton(header, moudContext(card, index), header && header.querySelector('.protocol-chevron')); }); }
   function showBanner() { if (document.querySelector('.it-mode-banner')) return; var banner = document.createElement('div'); banner.className = 'it-mode-banner'; banner.innerHTML = '<span>IT mode · ' + ALLOWED_EMAIL + '</span><span class="it-mode-queue-count"></span><button type="button" class="it-send-all" hidden>Send all</button><span class="it-inline-status"></span><button type="button" class="it-exit">Exit</button>'; banner.querySelector('.it-send-all').addEventListener('click', function () { sendEntries(entries); }); banner.querySelector('.it-exit').addEventListener('click', function () { location.reload(); }); document.body.appendChild(banner); refreshQueue(); }
-  function enableItMode() { if (enabled) return; enabled = true; document.documentElement.classList.add('it-mode-enabled'); showBanner(); addWorkflowButtons(); addMoudButtons(); }
-  var scanTimer = 0;
-  function scheduleEnabledScan() { if (scanTimer) return; scanTimer = window.setTimeout(function () { scanTimer = 0; if (enabled) { addWorkflowButtons(); addMoudButtons(); refreshQueue(); } }, 50); }
-  function observerNeedsScan(records) { return records.some(function (record) { return Array.prototype.some.call(record.addedNodes || [], function (node) { return node.nodeType === 1 && !node.matches('.it-inline-editor,.it-mode-banner,.it-mode-entry,.it-request-btn') && !node.closest('.it-inline-editor,.it-mode-banner,.it-mode-entry,.it-request-btn'); }); }); }
-  function init() { injectStyles(); ensureEntryButton(); new MutationObserver(function (records) { ensureEntryButton(); if (enabled && observerNeedsScan(records)) scheduleEnabledScan(); }).observe(document.body, { childList: true, subtree: true }); }
+  function enableItMode() { if (enabled) return; enabled = true; if (pageObserver) pageObserver.disconnect(); document.documentElement.classList.add('it-mode-enabled'); showBanner(); addWorkflowButtons(); addMoudButtons(); }
+  function init() { injectStyles(); ensureEntryButton(); pageObserver = new MutationObserver(function () { if (!enabled) ensureEntryButton(); }); pageObserver.observe(document.body, { childList: true, subtree: true }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
