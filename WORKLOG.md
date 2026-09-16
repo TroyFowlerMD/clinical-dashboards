@@ -93,3 +93,9 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Implemented website-feedback #136 so opening a top-level workflow phase expands every nested workflow item within that phase by default.
 - In progress: Publication and live browser verification; the issue remains open until the behavior is confirmed live.
 - Blockers/notes: No screenshots or supplemental request comments were attached. DECISIONS.md unchanged because this is a narrow interaction update.
+
+### 2026-09-16 - ChatGPT Work - JFK automatic nested-card expansion receipt
+- Completed: PR #31 merged as 709f0f80902e60299e1618c4ae121170c8290bf0 and GitHub Pages deployment https://github.com/TroyFowlerMD/clinical-dashboards/actions/runs/35160157156 succeeded.
+- Completed: Live browser verification confirmed opening Admission expanded all 16 nested items and opening Admission Denial expanded all 5 nested items, with representative instructions visible. Closed website-feedback #136 after posting the evidence.
+- Completed: git diff --check, node scripts/check-jfk-pwa-cache.mjs, the required GitHub cache guard, and live interaction checks passed. DECISIONS.md unchanged.
+- Blockers/notes: None.
