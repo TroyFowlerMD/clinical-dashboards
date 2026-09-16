@@ -2,22 +2,27 @@
 
 The repository-side IT Mode is implemented for `jfk/workflows.html` and `jfk/moud.html`. It is deliberately fail-closed: contextual request buttons are not created unless Cloudflare Access reports the authenticated identity as `troyfowlermd@gmail.com`.
 
-## Required Cloudflare architecture
+## Production architecture (2026-09-16)
 
-1. Use Troy's personal/corporate Cloudflare account, not the account associated with COCM.
-2. Put an admin-only hostname in front of the existing GitHub Pages JFK content, using a Cloudflare Worker or equivalent reverse proxy.
-3. Create a Cloudflare Zero Trust Access self-hosted application for the admin hostname/path.
-4. Configure Google as the identity provider.
-5. Add an Access policy that allows only `troyfowlermd@gmail.com`; do not use an email-domain allow rule.
-6. Ensure `GET /cdn-cgi/access/get-identity` is available on the protected origin. The client uses that endpoint and checks the exact email again before enabling IT Mode.
-7. Set `window.JFK_IT_MODE_ENTRY_URL` on the public pages to the protected URL for the corresponding page, or serve the same repository build from the protected hostname so the Enter button can verify identity in place.
+- Cloudflare account: Troy Fowler's non-COCM account (`0cc97ad133a28f1909ff91ee52a02c3e`), using the account `workers.dev` subdomain.
+- Worker: `jfk-it-mode`, deployed at `https://jfk-it-mode.troyfowlermd.workers.dev`.
+- Architecture: the Worker reverse-proxies the existing GitHub Pages site at `https://troyfowlermd.github.io/clinical-dashboards`, preserving request paths and query strings.
+- Access application: `JFK IT Mode`, a self-hosted Worker application protecting the Worker's production and preview URLs.
+- Identity provider: Google only; the application does not accept the other available provider or all-provider mode.
+- Allow policy: `JFK IT Mode - Troy exact email`, allowing only `troyfowlermd@gmail.com` through an exact Emails selector. No domain-wide rule is used.
+- Identity endpoint: `GET /cdn-cgi/access/get-identity`; `jfk/it-mode.js` performs a second exact-email check before enabling controls.
+- Public entry URLs:
+  - `jfk/workflows.html` → `https://jfk-it-mode.troyfowlermd.workers.dev/jfk/workflows.html`
+  - `jfk/moud.html` → `https://jfk-it-mode.troyfowlermd.workers.dev/jfk/moud.html`
+
+The Worker uses the existing account `workers.dev` hostname because this Cloudflare account has no managed custom domains. This avoids purchasing or transferring a domain while preserving the public GitHub Pages URLs.
 
 ## Verification
 
 - The public GitHub Pages URL continues to show the small **Enter IT mode (admin only)** button, but cannot reveal contextual request controls.
-- The protected URL prompts for Cloudflare Google authentication.
-- `troyfowlermd@gmail.com` can enter IT Mode.
-- A different Google account is denied.
+- The protected URL prompts for Cloudflare Google authentication (verified on the production Workflows URL).
+- `troyfowlermd@gmail.com` can enter IT Mode (verified; the page banner displays the approved email).
+- A non-approved Google account must be denied by the exact-email policy; perform this negative test when a second signed-in Google account is available.
 - After entry, every workflow phase and nested workflow item has a **Request change** button.
 - Every MOUD protocol card has a **Request change** button.
 - Submissions create GitHub issues through the shared widget, identify the exact page/card/subcard in `Area`, do not request a username, and allow selecting or pasting up to three images.

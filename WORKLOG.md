@@ -8,8 +8,9 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Added a fail-closed IT Mode entry control to Epic Workflows and the MOUD Prescriber Guide; after verified Cloudflare Access identity, IT Mode adds contextual GitHub-issue request buttons to every workflow phase, workflow subcard, and MOUD protocol card.
 - Completed: Contextual requests carry the exact page/card/subcard path, preset the authenticated submitter as `troymd`, hide the username field, and retain pasted/selected image support from the shared feedback widget.
 - Completed: Bumped the JFK workflow service-worker cache and added IT Mode setup/verification documentation.
-- In progress: Cloudflare Zero Trust configuration and protected-host routing in Troy's non-COCM Cloudflare account.
-- Blockers/notes: The Cloudflare dashboard kept this cloud browser in a human-verification challenge loop, so account configuration could not be inspected or changed here. The feature remains intentionally unavailable until `/cdn-cgi/access/get-identity` returns the exact allowed email.
+- Completed: Configured the non-COCM Cloudflare account's Free-compatible `jfk-it-mode.troyfowlermd.workers.dev` reverse proxy and Google-only Zero Trust Access application with an exact `troyfowlermd@gmail.com` allow policy.
+- Completed: Verified the protected production Workflows URL redirects through Google, returns to the Worker, and enables contextual Request change controls with the approved email banner.
+- In progress: Negative test with a different Google account and an end-to-end test submission remain to be performed when those test conditions are available.
 
 ### 2026-08-12 - Codex - JFK IVC hub placement and root-hub mobile layout
 - Completed: Removed the IVC Hub entry from the JFK landing page, retained the same destination from a new root-hub IVC tile, and changed the root dashboard links to compact icon tiles with a two-column phone layout.
