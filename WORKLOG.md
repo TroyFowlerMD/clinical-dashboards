@@ -88,3 +88,8 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Live browser verification at https://troyfowlermd.github.io/clinical-dashboards/jfk/workflows.html confirmed all five edits, expanded the new Psych History + card, exercised its checkbox, and opened Problem List and Admission Denial > Note to inspect the full instructions. Closed #104 and #132–135 only afterward, with evidence comments. Reviewed and commented on #97, #98, #117, #118; these stay open because they request no change.
 - Completed: git diff --check, node scripts/check-jfk-pwa-cache.mjs, and required GitHub cache checks passed. DECISIONS.md unchanged: no new architecture or publishing policy.
 - Blockers/notes: Shell push lacked credentials; used the GitHub connector. Main branch protections required a PR and passing cache check, which were honored. Protected Worker browser navigation was blocked by automatic approval review at its Google sign-in redirect; authenticated proxy verification remains unconfirmed. Public live dashboard verification succeeded.
+
+### 2026-09-16 - ChatGPT Work - JFK automatic nested-card expansion
+- Completed: Implemented website-feedback #136 so opening a top-level workflow phase expands every nested workflow item within that phase by default.
+- In progress: Publication and live browser verification; the issue remains open until the behavior is confirmed live.
+- Blockers/notes: No screenshots or supplemental request comments were attached. DECISIONS.md unchanged because this is a narrow interaction update.
