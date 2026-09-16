@@ -18,7 +18,6 @@
       '.it-request-btn:hover{filter:brightness(1.08)}',
       '.it-mode-banner{position:fixed;right:12px;bottom:12px;z-index:1000;display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--teal-border,var(--border));border-radius:9px;background:var(--surface,#182027);color:var(--text);box-shadow:0 8px 28px rgba(0,0,0,.32);font-size:11px;font-weight:700}',
       '.it-mode-banner button{padding:3px 7px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text);cursor:pointer}',
-      '.it-widget-host{display:none}',
       '@media print{.it-mode-entry,.it-request-btn,.it-mode-banner,.it-mode-entry-status{display:none!important}}'
     ].join('');
     document.head.appendChild(style);
