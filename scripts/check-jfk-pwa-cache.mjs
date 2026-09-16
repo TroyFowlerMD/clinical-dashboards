@@ -52,13 +52,18 @@ vm.runInContext(serviceWorkerSource, context, { filename: 'jfk/sw.js' });
 
 assert.match(
   serviceWorkerSource,
-  /workflows-v3-2026-09-16-it-mode/,
+  /workflows-v4-2026-09-16-it-batch/,
   'the JFK workflows cache version must identify the current IT Mode release'
 );
 assert.match(
   serviceWorkerSource,
   /new URL\('it-mode\.js', BASE_URL\)/,
   'the JFK workflows app shell must include IT Mode'
+);
+assert.match(
+  serviceWorkerSource,
+  /url\.pathname\.endsWith\('\/it-mode\.js'\)[\s\S]*fetch\(request, \{ cache: 'no-store' \}\)/,
+  'the IT Mode client must refresh from the network before using its offline copy'
 );
 
 const request = {
