@@ -65,7 +65,7 @@
       var entry = list[index];
       try {
         var attachments = await Promise.all(entry.files.map(readAttachment));
-        var response = await fetch(FEEDBACK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: APP_ID, name: 'troymd', message: entry.textarea.value.trim(), attachments: attachments, pageTitle: document.title, pageUrl: location.href, source: 'shared-feedback-widget', area: entry.context, userAgent: navigator.userAgent, submissionId: crypto.randomUUID ? crypto.randomUUID() : 'fb-' + Date.now() }) });
+        var response = await fetch(FEEDBACK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: APP_ID, name: 'troymd', message: entry.textarea.value.trim(), attachments: attachments, pageTitle: document.title, pageUrl: location.href, source: 'shared-feedback-widget', area: entry.context, areaDetail: entry.context, userAgent: navigator.userAgent, submissionId: crypto.randomUUID ? crypto.randomUUID() : 'fb-' + Date.now() }) });
         if (!response.ok) throw new Error('submit-failed');
         entry.sent = true;
         entry.editor.hidden = true;
