@@ -39,6 +39,16 @@
   function attachmentText(entry) { entry.attachments.textContent = entry.files.length ? entry.files.length + ' screenshot' + (entry.files.length === 1 ? '' : 's') + ' attached.' : 'You can paste up to 3 PNG, JPEG, or WebP screenshots.'; }
   function addAttachments(entry, files) { Array.prototype.slice.call(files || []).forEach(function (file) { if (IMAGE_TYPES[file.type] && file.size <= MAX_ATTACHMENT_BYTES && entry.files.length < MAX_ATTACHMENTS) entry.files.push(file); }); attachmentText(entry); }
   function readAttachment(file) { return new Promise(function (resolve, reject) { var reader = new FileReader(); reader.onload = function () { resolve({ name: file.name || 'screenshot', type: file.type, data: String(reader.result).split(',')[1] || '' }); }; reader.onerror = reject; reader.readAsDataURL(file); }); }
+  function submitErrorMessage(code, status) {
+    var messages = {
+      feedback_create_failed: 'GitHub could not create this ticket. Your request is still here to retry.',
+      feedback_auth_failed: 'The ticket service needs its GitHub authorization renewed. Your request is still here.',
+      rate_limited: 'Too many recent submissions. Wait a few minutes, then retry; your requests are still here.',
+      invalid_batch: 'This batch could not be validated. Your requests are still here to edit and retry.',
+      origin_not_allowed: 'This IT Mode page is not authorized to submit tickets.'
+    };
+    return messages[code] || ('Ticket submission failed' + (status ? ' (HTTP ' + status + ')' : '') + '. Your requests are still here to retry.');
+  }
   function refreshQueue() { var count = entries.filter(function (entry) { return entry.pending && !entry.sent; }).length; var queue = document.querySelector('.it-mode-queue-count'); var sendAll = document.querySelector('.it-send-all'); if (queue) queue.textContent = count ? count + ' pending' : ''; if (sendAll) sendAll.hidden = !entries.some(function (entry) { return !entry.sent && entry.textarea.value.trim(); }); }
   function createEntry(editor, context) {
     var entry = { context: context, files: [], pending: false, sent: false, editor: editor, request: document.createElement('div'), textarea: document.createElement('textarea'), attachments: document.createElement('div') };
@@ -68,18 +78,18 @@
       }));
       var response = await fetch(FEEDBACK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: APP_ID, name: 'troymd', entries: payloadEntries, pageTitle: document.title, pageUrl: location.href, source: 'shared-feedback-widget', userAgent: navigator.userAgent }) });
       var result = await response.json().catch(function () { return {}; });
-      if (!Array.isArray(result.results)) throw new Error('submit-failed');
+      if (!Array.isArray(result.results)) { var responseError = new Error(result.error || 'submit-failed'); responseError.status = response.status; throw responseError; }
       var sentCount = 0;
       result.results.forEach(function (outcome) {
         var entry = list.find(function (candidate) { return candidate.submissionId === outcome.submissionId; });
         if (!entry) return;
         if (outcome.ok) { entry.sent = true; entry.editor.hidden = true; sentCount += 1; }
-        else entry.status.textContent = 'Could not submit this request. It is still here to retry.';
+        else entry.status.textContent = submitErrorMessage(outcome.error, response.status);
       });
       entries = entries.filter(function (entry) { return !entry.sent; }); refreshQueue();
       if (sentCount) showConfirmation(sentCount);
-      if (sentCount < list.length && bannerStatus) bannerStatus.textContent = sentCount ? (list.length - sentCount) + ' request' + (list.length - sentCount === 1 ? '' : 's') + ' still need to be sent.' : 'Could not submit. Please try again.';
-    } catch (error) { list.forEach(function (entry) { entry.status.textContent = 'Could not submit this batch. Your requests are still here to retry.'; }); if (bannerStatus) bannerStatus.textContent = 'Could not submit. Please try again.'; }
+      if (sentCount < list.length && bannerStatus) bannerStatus.textContent = sentCount ? (list.length - sentCount) + ' request' + (list.length - sentCount === 1 ? '' : 's') + ' still need to be sent.' : submitErrorMessage(result.error || (result.results[0] && result.results[0].error), response.status);
+    } catch (error) { var message = submitErrorMessage(error && error.message, error && error.status); list.forEach(function (entry) { entry.status.textContent = message; }); if (bannerStatus) bannerStatus.textContent = message; }
   }
   function showConfirmation(count) { var dialog = document.getElementById('it-confirm-dialog'); if (!dialog) { dialog = document.createElement('dialog'); dialog.id = 'it-confirm-dialog'; dialog.className = 'it-confirm-dialog'; dialog.innerHTML = '<h2>IT requests sent</h2><p><span class="it-confirm-count"></span> submitted successfully.</p><p>Continue in <a href="https://chatgpt.com/codex/cloud" target="_blank" rel="noopener">Codex Cloud</a> to review and complete the requested changes.</p><div><button type="button" class="it-copy-prompt">Copy Codex prompt</button><button type="button" class="it-close-confirm">Close</button></div>'; dialog.querySelector('.it-copy-prompt').addEventListener('click', function () { navigator.clipboard.writeText(CODEX_PROMPT).then(function () { dialog.querySelector('.it-copy-prompt').textContent = 'Copied'; }); }); dialog.querySelector('.it-close-confirm').addEventListener('click', function () { dialog.close(); }); document.body.appendChild(dialog); } dialog.querySelector('.it-confirm-count').textContent = count + (count === 1 ? ' request was' : ' requests were'); dialog.showModal(); }
   function addRequestButton(container, context, insertBefore) { if (!container || container.querySelector(':scope > .it-request-btn')) return; var editor = document.createElement('div'); editor.className = 'it-inline-editor'; editor.hidden = true; var entry = createEntry(editor, context); editor.appendChild(entry.request); var button = document.createElement('button'); button.type = 'button'; button.className = 'it-request-btn'; button.textContent = 'Request change'; button.title = 'Submit an IT request for ' + context; button.addEventListener('click', function (event) { event.preventDefault(); event.stopPropagation(); editor.hidden = !editor.hidden; if (!editor.hidden) entry.textarea.focus(); }); var parent = container.parentElement; if (insertBefore && insertBefore.parentElement === container) container.insertBefore(button, insertBefore); else container.appendChild(button); if (parent) parent.insertBefore(editor, container.nextSibling); else container.appendChild(editor); }
