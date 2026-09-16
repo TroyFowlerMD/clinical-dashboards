@@ -151,6 +151,7 @@
     });
 
     container.appendChild(widget);
+    prepareWidget(widget, context);
     if (insertBefore && insertBefore.parentElement === container) container.insertBefore(button, insertBefore);
     else container.appendChild(button);
   }
