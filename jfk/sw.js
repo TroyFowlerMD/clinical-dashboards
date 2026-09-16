@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'workflows-v3-2026-09-16-it-mode';
+const CACHE_VERSION = 'workflows-v4-2026-09-16-it-batch';
 const CACHE_NAME = `jfk-workflows-${CACHE_VERSION}`;
 const BASE_URL = new URL('./', self.registration.scope);
 const OFFLINE_FALLBACK = new URL('workflows.html', BASE_URL).toString();
@@ -60,6 +60,21 @@ self.addEventListener('fetch', (event) => {
             cachedResponse || caches.match(OFFLINE_FALLBACK)
           )
         )
+    );
+    return;
+  }
+
+  if (url.pathname.endsWith('/it-mode.js')) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const responseClone = networkResponse.clone();
+            event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone)));
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(request).then((cachedResponse) => cachedResponse || caches.match(new URL('it-mode.js', BASE_URL).toString())))
     );
     return;
   }

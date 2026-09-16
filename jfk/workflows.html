@@ -1502,7 +1502,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         <!-- website-feedback automation verified 2026-08-11 -->
-        navigator.serviceWorker.register('./sw.js', { scope: './' }).catch((error) => {
+        navigator.serviceWorker.register('./sw.js', { scope: './', updateViaCache: 'none' }).catch((error) => {
           console.warn('[pwa] service worker registration failed:', error);
         });
       });
