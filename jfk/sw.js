@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'workflows-v2-2026-08-11-network-refresh';
+const CACHE_VERSION = 'workflows-v3-2026-09-16-it-mode';
 const CACHE_NAME = `jfk-workflows-${CACHE_VERSION}`;
 const BASE_URL = new URL('./', self.registration.scope);
 const OFFLINE_FALLBACK = new URL('workflows.html', BASE_URL).toString();
@@ -6,6 +6,7 @@ const APP_SHELL = [
   OFFLINE_FALLBACK,
   new URL('styles.css', BASE_URL).toString(),
   new URL('feedback-submit.js', BASE_URL).toString(),
+  new URL('it-mode.js', BASE_URL).toString(),
   new URL('manifest.webmanifest', BASE_URL).toString(),
   new URL('icon-192.png', BASE_URL).toString(),
   new URL('icon-512.png', BASE_URL).toString(),

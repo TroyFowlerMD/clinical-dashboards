@@ -4,6 +4,13 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 
 ---
 
+### 2026-09-16 - ChatGPT Work - JFK contextual IT Mode foundation
+- Completed: Added a fail-closed IT Mode entry control to Epic Workflows and the MOUD Prescriber Guide; after verified Cloudflare Access identity, IT Mode adds contextual GitHub-issue request buttons to every workflow phase, workflow subcard, and MOUD protocol card.
+- Completed: Contextual requests carry the exact page/card/subcard path, preset the authenticated submitter as `troymd`, hide the username field, and retain pasted/selected image support from the shared feedback widget.
+- Completed: Bumped the JFK workflow service-worker cache and added IT Mode setup/verification documentation.
+- In progress: Cloudflare Zero Trust configuration and protected-host routing in Troy's non-COCM Cloudflare account.
+- Blockers/notes: The Cloudflare dashboard kept this cloud browser in a human-verification challenge loop, so account configuration could not be inspected or changed here. The feature remains intentionally unavailable until `/cdn-cgi/access/get-identity` returns the exact allowed email.
+
 ### 2026-08-12 - Codex - JFK IVC hub placement and root-hub mobile layout
 - Completed: Removed the IVC Hub entry from the JFK landing page, retained the same destination from a new root-hub IVC tile, and changed the root dashboard links to compact icon tiles with a two-column phone layout.
 - In progress: Awaiting normal workflow review, commit, publication, and production verification.
