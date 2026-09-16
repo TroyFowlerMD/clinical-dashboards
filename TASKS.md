@@ -7,6 +7,7 @@
 - [!] Blocked - include reason in parentheses
 
 ## Active Tasks
+- [~] Publish and live-verify website-feedback #136: automatically expand every nested workflow item when its main workflow card opens.
 - [x] Published and browser-verified JFK workflow edits for website-feedback #104 and #132–135 via PR #29; all five closed after live verification. #97, #98, #117, #118 remain open as test-only submissions with no requested change.
 - [~] Migrate JFK feedback to the shared GitHub-issue widget; central pilot wiring is in progress and needs live verification after publication.
 - [!] Finish JFK IT Mode Cloudflare Access rollout (repository UI is implemented; blocked on configuring Troy's non-COCM Cloudflare account, protected admin hostname, Google IdP, and exact-email Access policy).

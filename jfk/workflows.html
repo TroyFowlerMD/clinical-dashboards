@@ -1396,7 +1396,14 @@
        ================================================================ */
     function togglePhase(header) {
       const phase = header.closest('.workflow-phase');
+      const isOpening = !phase.classList.contains('expanded');
       phase.classList.toggle('expanded');
+
+      if (isOpening) {
+        phase.querySelectorAll('.wf-item').forEach(item => {
+          item.classList.add('expanded');
+        });
+      }
     }
 
     /* ================================================================
