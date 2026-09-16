@@ -60,9 +60,23 @@
   async function sendEntries(selected) {
     var list = selected.filter(function (entry) { return !entry.sent && entry.textarea.value.trim(); }); if (!list.length) return;
     var bannerStatus = document.querySelector('.it-mode-banner .it-inline-status'); if (bannerStatus) bannerStatus.textContent = 'Sending…';
-    try { await Promise.all(list.map(async function (entry) { var attachments = await Promise.all(entry.files.map(readAttachment)); var response = await fetch(FEEDBACK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: APP_ID, name: 'troymd', message: entry.textarea.value.trim(), attachments: attachments, pageTitle: document.title, pageUrl: location.href, source: 'shared-feedback-widget', area: entry.context, userAgent: navigator.userAgent, submissionId: crypto.randomUUID ? crypto.randomUUID() : 'fb-' + Date.now() }) }); if (!response.ok) throw new Error('submit-failed'); entry.sent = true; }));
-      list.forEach(function (entry) { entry.editor.hidden = true; }); entries = entries.filter(function (entry) { return !entry.sent; }); refreshQueue(); showConfirmation(list.length);
-    } catch (error) { if (bannerStatus) bannerStatus.textContent = 'Could not submit. Please try again.'; }
+    var sentCount = 0;
+    for (var index = 0; index < list.length; index += 1) {
+      var entry = list[index];
+      try {
+        var attachments = await Promise.all(entry.files.map(readAttachment));
+        var response = await fetch(FEEDBACK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ appId: APP_ID, name: 'troymd', message: entry.textarea.value.trim(), attachments: attachments, pageTitle: document.title, pageUrl: location.href, source: 'shared-feedback-widget', area: entry.context, userAgent: navigator.userAgent, submissionId: crypto.randomUUID ? crypto.randomUUID() : 'fb-' + Date.now() }) });
+        if (!response.ok) throw new Error('submit-failed');
+        entry.sent = true;
+        entry.editor.hidden = true;
+        sentCount += 1;
+      } catch (error) {
+        entry.status.textContent = 'Could not submit this request. It is still here to retry.';
+      }
+    }
+    entries = entries.filter(function (entry) { return !entry.sent; }); refreshQueue();
+    if (sentCount) showConfirmation(sentCount);
+    if (sentCount < list.length && bannerStatus) bannerStatus.textContent = sentCount ? (list.length - sentCount) + ' request' + (list.length - sentCount === 1 ? '' : 's') + ' still need to be sent.' : 'Could not submit. Please try again.';
   }
   function showConfirmation(count) { var dialog = document.getElementById('it-confirm-dialog'); if (!dialog) { dialog = document.createElement('dialog'); dialog.id = 'it-confirm-dialog'; dialog.className = 'it-confirm-dialog'; dialog.innerHTML = '<h2>IT requests sent</h2><p><span class="it-confirm-count"></span> submitted successfully.</p><p>Continue in <a href="https://chatgpt.com/codex/cloud" target="_blank" rel="noopener">Codex Cloud</a> to review and complete the requested changes.</p><div><button type="button" class="it-copy-prompt">Copy Codex prompt</button><button type="button" class="it-close-confirm">Close</button></div>'; dialog.querySelector('.it-copy-prompt').addEventListener('click', function () { navigator.clipboard.writeText(CODEX_PROMPT).then(function () { dialog.querySelector('.it-copy-prompt').textContent = 'Copied'; }); }); dialog.querySelector('.it-close-confirm').addEventListener('click', function () { dialog.close(); }); document.body.appendChild(dialog); } dialog.querySelector('.it-confirm-count').textContent = count + (count === 1 ? ' request was' : ' requests were'); dialog.showModal(); }
   function addRequestButton(container, context, insertBefore) { if (!container || container.querySelector(':scope > .it-request-btn')) return; var editor = document.createElement('div'); editor.className = 'it-inline-editor'; editor.hidden = true; var entry = createEntry(editor, context); editor.appendChild(entry.request); var button = document.createElement('button'); button.type = 'button'; button.className = 'it-request-btn'; button.textContent = 'Request change'; button.title = 'Submit an IT request for ' + context; button.addEventListener('click', function (event) { event.preventDefault(); event.stopPropagation(); editor.hidden = !editor.hidden; if (!editor.hidden) entry.textarea.focus(); }); var parent = container.parentElement; if (insertBefore && insertBefore.parentElement === container) container.insertBefore(button, insertBefore); else container.appendChild(button); if (parent) parent.insertBefore(editor, container.nextSibling); else container.appendChild(editor); }
