@@ -2,6 +2,12 @@
 
 This file records durable architectural, workflow, safety, and publishing decisions for Clinical Dashboards. Each entry should include Context, Decision, Rationale, and Consequences.
 
+### 2026-09-16 - Fail Closed For JFK IT Mode
+Context: Website-feedback issue #96 requested contextual, image-capable IT request controls throughout Epic Workflows and the MOUD Prescriber Guide, restricted to `troyfowlermd@gmail.com` through Cloudflare Google authentication.
+Decision: Keep the public clinical reference pages readable, but do not create contextual IT controls unless same-origin Cloudflare Access identity data reports the exact allowed email. Use the shared GitHub-issue widget for submission, preset `troymd`, and include the page/card/subcard hierarchy in the issue `Area` field. Do not rely on a client-only URL parameter or asserted email as authentication.
+Rationale: GitHub Pages cannot securely authenticate an administrator by itself. Exact-email Cloudflare Access enforcement plus a second exact-email client check provides a fail-closed boundary while preserving the existing public clinical content and centralized issue intake.
+Consequences: IT Mode requires a protected hostname or reverse proxy in Troy's non-COCM Cloudflare account. Until that external configuration exists, the public entry button reports that the protected Cloudflare URL is required and no contextual controls are exposed.
+
 ### 2026-08-11 - Refresh The JFK Offline Workflow Copy After Online Loads
 Context: `jfk/workflows.html` is precached for offline use, but successful online navigation did not replace that saved copy. Installed devices could therefore retain older clinical instructions after the live page changed.
 Decision: Use a network-first navigation strategy that saves each successful same-origin page response for later offline use. Bump the JFK workflows cache version for this release and enforce the behavior with an automated service-worker test on JFK changes.

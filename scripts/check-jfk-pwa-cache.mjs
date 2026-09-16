@@ -52,8 +52,13 @@ vm.runInContext(serviceWorkerSource, context, { filename: 'jfk/sw.js' });
 
 assert.match(
   serviceWorkerSource,
-  /workflows-v2-2026-08-11-network-refresh/,
-  'the JFK workflows cache version must identify the network-refresh release'
+  /workflows-v3-2026-09-16-it-mode/,
+  'the JFK workflows cache version must identify the current IT Mode release'
+);
+assert.match(
+  serviceWorkerSource,
+  /new URL\('it-mode\.js', BASE_URL\)/,
+  'the JFK workflows app shell must include IT Mode'
 );
 
 const request = {

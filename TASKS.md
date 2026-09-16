@@ -8,6 +8,7 @@
 
 ## Active Tasks
 - [~] Migrate JFK feedback to the shared GitHub-issue widget; central pilot wiring is in progress and needs live verification after publication.
+- [!] Finish JFK IT Mode Cloudflare Access rollout (repository UI is implemented; blocked on configuring Troy's non-COCM Cloudflare account, protected admin hostname, Google IdP, and exact-email Access policy).
 
 ## Upcoming
 - [ ] Decide whether to update `feedback-submit.js` or wire JFK pages to `feedback.js`.
