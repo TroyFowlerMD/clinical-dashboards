@@ -76,3 +76,9 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Ran a local relative href/src scan. The only findings were expected ASAM app root-path references inside `asam-app/client/index.html`, which are part of that app's own Vite structure rather than static hub links.
 - In progress: Existing JFK feedback submission follow-up and ASAM app public-entry decision remain open in TASKS.md.
 - Blockers/notes: No app code changed; TASKS.md and DECISIONS.md were not changed.
+
+### 2026-09-16 - ChatGPT Work - Authorized JFK workflow tickets
+- Completed: Implemented website-feedback #104 (expandable Psych History +), #132 (Admission Denial heading/description), #133 (Problem List note-refresh reminder), #134 (Psych History label), and #135 (Note and Outpatient Note Template instructions).
+- Completed: Read full issue bodies and all comments; no screenshots were attached. Reviewed #97, #98, #117, and #118 as diagnostic/test-only submissions with no requested implementation; left them open.
+- In progress: Publication and live browser verification; actionable issues remain open until confirmed live.
+- Blockers/notes: git diff --check and node scripts/check-jfk-pwa-cache.mjs pass. Existing network-first HTML caching refreshes the offline copy, so no service-worker change is needed. A trial cache-version bump hit the release-pinned assertion and was reverted before the passing check.

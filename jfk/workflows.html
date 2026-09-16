@@ -677,6 +677,7 @@
               </div>
               <div class="wf-item-body">
                 <p>Update once evaluation is complete. Mark the principal problem.</p>
+                <p>Do this before submitting the eval note; refresh the note before submitting to ensure that diagnoses are accurately reflected.</p>
               </div>
             </div>
 
@@ -747,12 +748,23 @@
 
             <div class="wf-item" id="item-psych-history">
               <div class="wf-item-header" onclick="toggleItem(this)">
-                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Psychiatric History complete">
-                <span class="wf-item-title">Psychiatric History</span>
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Psych History complete">
+                <span class="wf-item-title">Psych History</span>
                 <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="wf-item-body">
                 <p>Document thoroughly. For patients with extensive treatment histories, it's acceptable to consolidate multiple treatments into a single entry as long as pertinent information is captured.</p>
+              </div>
+            </div>
+
+            <div class="wf-item" id="item-psych-history-plus">
+              <div class="wf-item-header" onclick="toggleItem(this)">
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Psych History + complete">
+                <span class="wf-item-title">Psych History +</span>
+                <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="wf-item-body">
+                <p>Complete section.</p>
               </div>
             </div>
 
@@ -1132,8 +1144,8 @@
     <div class="workflow-phase" data-searchable>
       <div class="workflow-phase-header" onclick="togglePhase(this)">
         <div class="workflow-phase-header-text">
-          <div class="workflow-phase-title">Admission Denial <span class="meta-text">(formerly EMTALA)</span></div>
-          <div class="workflow-phase-subtitle">Patient presents for evaluation but is not admitted</div>
+          <div class="workflow-phase-title">Admission Denial</div>
+          <div class="workflow-phase-subtitle">For any patient evaluated but NOT admitted</div>
         </div>
         <svg class="workflow-phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
@@ -1157,12 +1169,17 @@
 
             <div class="wf-item" id="item-denial-note">
               <div class="wf-item-header" onclick="toggleItem(this)">
-                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Medical Screening Exam note complete">
-                <span class="wf-item-title">Medical Screening Exam Note</span>
+                <input type="checkbox" class="wf-item-checkbox" onclick="toggleCheck(event, this)" aria-label="Mark Note complete">
+                <span class="wf-item-title">Note</span>
                 <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="wf-item-body">
-                <p>Notes tab → New Note → SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKMEDICALSCREENINGEXAMFOREMTALA</span></p>
+                <p>Notes tab → New Note</p>
+                <p>Note type = Progress note</p>
+                <p>Use Outpatient Note Template</p>
+                <ul>
+                  <li>Search "outpatient" in the Insert SmartText field or right-click in the note body and select "SmartText".</li>
+                </ul>
               </div>
             </div>
 
