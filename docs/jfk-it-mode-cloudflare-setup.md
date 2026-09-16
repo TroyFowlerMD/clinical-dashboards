@@ -25,4 +25,4 @@ The Worker uses the existing account `workers.dev` hostname because this Cloudfl
 - A non-approved Google account must be denied by the exact-email policy; perform this negative test when a second signed-in Google account is available.
 - After entry, every workflow phase and nested workflow item has a **Request change** button.
 - Every MOUD protocol card has a **Request change** button.
-- Submissions create GitHub issues through the shared widget, identify the exact page/card/subcard in `Area`, do not request a username, and allow selecting or pasting up to three images.
+- IT Mode uses an inline request editor rather than the shared feedback dialog. Each editor identifies the exact page/card/subcard in `Area`, uses the fixed `troymd` submitter, and allows up to three pasted or selected PNG/JPEG/WebP screenshots. A single request can be sent with `Send`; `Add another request` creates additional boxes on the same card and `Send all` submits them together.
