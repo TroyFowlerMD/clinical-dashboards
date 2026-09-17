@@ -99,3 +99,9 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Live browser verification confirmed opening Admission expanded all 16 nested items and opening Admission Denial expanded all 5 nested items, with representative instructions visible. Closed website-feedback #136 after posting the evidence.
 - Completed: git diff --check, node scripts/check-jfk-pwa-cache.mjs, the required GitHub cache guard, and live interaction checks passed. DECISIONS.md unchanged.
 - Blockers/notes: None.
+
+### 2026-09-17 - ChatGPT Work - JFK IT Mode one-click entry
+- Completed: Diagnosed website-feedback #137: Cloudflare Access can return to the protected Worker without preserving the `it_mode=1` query parameter, so authentication succeeds but contextual controls wait for a second click.
+- Completed: Updated IT Mode to auto-enter whenever either JFK page is served from the Access-protected Worker hostname; the query parameter remains supported as a compatibility signal.
+- In progress: Pull-request checks, merge, deployment, and live protected-URL verification. Issue #137 remains open until the one-click flow is confirmed live.
+- Blockers/notes: The protected hostname remains guarded by the exact-email Cloudflare Access policy; this change does not expose IT controls on public GitHub Pages.
