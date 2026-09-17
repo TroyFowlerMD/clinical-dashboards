@@ -7,6 +7,7 @@
 - [!] Blocked - include reason in parentheses
 
 ## Active Tasks
+- [~] Resolve website-feedback #137: make protected JFK IT Mode enter automatically after Cloudflare Access authentication, without depending on the redirect preserving `?it_mode=1`.
 - [x] Published and live-verified website-feedback #136: every nested workflow item now expands automatically when its main workflow card opens.
 - [x] Published and browser-verified JFK workflow edits for website-feedback #104 and #132–135 via PR #29; all five closed after live verification. #97, #98, #117, #118 remain open as test-only submissions with no requested change.
 - [~] Migrate JFK feedback to the shared GitHub-issue widget; central pilot wiring is in progress and needs live verification after publication.
