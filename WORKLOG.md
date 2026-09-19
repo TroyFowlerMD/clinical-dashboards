@@ -105,3 +105,8 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Updated IT Mode to auto-enter whenever either JFK page is served from the Access-protected Worker hostname; the query parameter remains supported as a compatibility signal.
 - In progress: Pull-request checks, merge, deployment, and live protected-URL verification. Issue #137 remains open until the one-click flow is confirmed live.
 - Blockers/notes: The protected hostname remains guarded by the exact-email Cloudflare Access policy; this change does not expose IT controls on public GitHub Pages.
+
+### 2026-09-19 - Codex - IT request #141 feedback card labels
+- Completed: Updated the five JFK feedback cards, shared widget launcher labels, and the IT mode entry placement on the MOUD and workflows cards.
+- In progress: Publish the change and verify the rendered production cards before closing the intake ticket.
+- Blockers/notes: Local file preview was blocked by the in-app browser URL policy; syntax, diff, and JFK PWA cache checks passed.
