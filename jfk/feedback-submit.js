@@ -6,7 +6,7 @@
     var box = document.getElementById('feedbackBox') || document.getElementById('feedbackForm')?.parentElement;
     var page = location.pathname.split('/').pop() || 'home';
     if (box) {
-      box.innerHTML = '<h2>Suggestions &amp; Feedback</h2><website-feedback app-id="jfk-clinical-dashboard" area="' + page + '" button-label="Open feedback form"></website-feedback>';
+      box.innerHTML = '<h2>IT requests / Feedback</h2><website-feedback app-id="jfk-clinical-dashboard" area="' + page + '" button-label="Submit Ticket/ Feedback"></website-feedback>';
     }
 
     document.querySelectorAll('.protocol-card').forEach(function (card, index) {
@@ -17,7 +17,7 @@
         .replace(/^-+|-+$/g, '');
       var feedback = document.createElement('div');
       feedback.className = 'card-feedback';
-      feedback.innerHTML = '<website-feedback app-id="jfk-clinical-dashboard" area="' + page + '-' + slug + '" button-label="Submit feedback/correction"></website-feedback>';
+      feedback.innerHTML = '<website-feedback app-id="jfk-clinical-dashboard" area="' + page + '-' + slug + '" button-label="Submit Ticket/ Feedback"></website-feedback>';
       var body = card.querySelector('.protocol-body-inner') || card.querySelector('.protocol-body');
       if (body) body.appendChild(feedback);
     });
