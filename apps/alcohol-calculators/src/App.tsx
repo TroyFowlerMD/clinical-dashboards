@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import AppDashboard from "./components/AppDashboard";
 import StandardDrinkCalculator from "./components/StandardDrinkCalculator";
 import BALTrajectoryCalculator from "./components/BALTrajectoryCalculator";
@@ -31,6 +31,13 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <div className="feedback-toolbar" aria-label="IT requests and feedback">
+        {createElement("website-feedback", {
+          "app-id": "alcohol-calculators",
+          area: route,
+          "button-label": "Submit Ticket / Feedback"
+        })}
+      </div>
       {route === "dashboard" && <AppDashboard onSelect={navigate} />}
       {route === "standard-drinks" && (
         <StandardDrinkCalculator onBack={() => navigate("dashboard")} />

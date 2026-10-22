@@ -110,3 +110,9 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Updated the five JFK feedback cards, shared widget launcher labels, and the IT mode entry placement on the MOUD and workflows cards.
 - In progress: Publish the change and verify the rendered production cards before closing the intake ticket.
 - Blockers/notes: Local file preview was blocked by the in-app browser URL policy; syntax, diff, and JFK PWA cache checks passed.
+
+### 2026-10-22 - ChatGPT Work - Alcohol calculator feedback and Bootleggers
+- Completed: Added the shared website-feedback ticket widget on all calculator views with route context; registered alcohol-calculators in the central intake registry. Added searchable Johny Bootlegger aliases, the 200 mL bottle, 12% default, and editable 10%/8% variants from the brand's product page.
+- Completed: TypeScript check, 12 Vitest tests, and production build passed; registry and API guards pass for seven managed sites. React review found no new hook, listener, or accessibility issues.
+- In progress: Publish both repositories and verify the live calculator and one controlled intake-only test.
+- Blockers/notes: No gen_beverages.py exists in the repository or available workspace, so the directory addition was made directly and covered by lookup/category/calculation tests. No patient data or calculator input values are attached to feedback automatically.

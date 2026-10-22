@@ -71,3 +71,9 @@ Context: The clinical dashboard hub needed a mobile-first alcohol calculator sui
 Decision: Keep source under `apps/alcohol-calculators/` and build static GitHub Pages output into `alcohol-calculators/`.
 Rationale: This preserves the ASAM app boundary while giving the public static hub a directly deployable calculator URL.
 Consequences: Future calculator edits should happen in `apps/alcohol-calculators/`, followed by `npm run test`, `npm run check`, and `npm run build` from that folder before committing the regenerated `alcohol-calculators/` output.
+
+### 2026-10-22 - Alcohol Calculator Shared IT Intake And Bootleggers
+Context: Troy requested the same GitHub IT requests used by Psych Scheduler and Bootleggers in the drink directory.
+Decision: Load the existing shared feedback widget and register a separate alcohol-calculators App ID centrally, retaining hash-route area context on every calculator view. Add the classic Johny Bootlegger 200 mL bottle with 12% default and 10%/8% variants; the bottle label remains authoritative.
+Rationale: Reusing intake preserves private issue storage, attachments, assignment, and approval routing. Exact 200 mL volume avoids rounding the bottle to 6.8 oz for calculations.
+Consequences: Directory lookup and variant calculation tests cover the addition. The previously documented gen_beverages.py is absent from the repository and available workspace; this focused, source-cited data update is maintained directly until a generator is restored.
