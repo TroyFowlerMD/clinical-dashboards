@@ -601,3 +601,8 @@ select {
     top: 16px;
   }
 }
+.feedback-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 12px;
+}

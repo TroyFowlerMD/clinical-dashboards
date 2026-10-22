@@ -21,6 +21,19 @@ export const categories: CategoryMeta[] = [
 
 export const beverages: BeverageEntry[] = [
   {
+    id: "johny_bootlegger",
+    displayName: "Johny Bootlegger",
+    aliases: ["bootlegger", "bootleggers", "johnny bootlegger", "johnny bootleggers", "johny bootleggers", "alcatraz sour apple", "scarface sour raspberry", "juice joint watermelon", "sing sing sour grape", "syndicate city sour peach", "prison break black cherry", "ice lemonade", "shady shades strawberry", "fox hole fruit punch", "hard huckleberry"],
+    category: "fmb-rtd",
+    style: "flavored malt beverage",
+    defaultAbv: 12,
+    abvOptions: [12, 10, 8],
+    commonContainers: [{ volume: 200, unit: "mL", nickname: "6.8 fl oz bottle" }],
+    abvSource: "product directory",
+    notes: "Classic 200 mL bottle; defaults to 12% ABV. Some states sell 10% or 8% versions. Verify the bottle label and select or enter its ABV; Speakeasy products may differ.",
+    sourceUrl: "https://www.johnybootlegger.com/flavors-cms/alcatraz-sour-apple"
+  },
+  {
     id: "bud_light",
     displayName: "Bud Light",
     aliases: ["budlight"],
