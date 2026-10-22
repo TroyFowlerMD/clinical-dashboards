@@ -7,7 +7,7 @@
 - [!] Blocked - include reason in parentheses
 
 ## Active Tasks
-- [~] Add shared GitHub IT requests to all alcohol calculator views and Johny Bootlegger directory defaults; validation passed, publication/live verification in progress.
+- [x] Published and live-verified alcohol calculator IT requests and Johny Bootlegger directory defaults (clinical-dashboards PR #38; website-feedback PR #145; intake-only test #146 verified and closed).
 - [~] Resolve website-feedback #137: make protected JFK IT Mode enter automatically after Cloudflare Access authentication, without depending on the redirect preserving `?it_mode=1`.
 - [x] Published and live-verified website-feedback #136: every nested workflow item now expands automatically when its main workflow card opens.
 - [x] Published and browser-verified JFK workflow edits for website-feedback #104 and #132–135 via PR #29; all five closed after live verification. #97, #98, #117, #118 remain open as test-only submissions with no requested change.

@@ -116,3 +116,10 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: TypeScript check, 12 Vitest tests, and production build passed; registry and API guards pass for seven managed sites. React review found no new hook, listener, or accessibility issues.
 - In progress: Publish both repositories and verify the live calculator and one controlled intake-only test.
 - Blockers/notes: No gen_beverages.py exists in the repository or available workspace, so the directory addition was made directly and covered by lookup/category/calculation tests. No patient data or calculator input values are attached to feedback automatically.
+
+### 2026-10-22 - ChatGPT Work - Alcohol calculator publication receipt
+- Completed: Merged clinical-dashboards PR #38 as 3abed84408e019676ef4a6602f6a6d5e42f336ef and website-feedback PR #145 as 46e99517ea791f9159cca57fce577a640ce88448. GitHub Pages run 39807764680 succeeded; the shared intake production deployment passed.
+- Completed: Live browser verification confirmed search for bootleggers, 200 mL auto-fill, 12%/10%/8% options, 1.4 displayed standard drinks for one 12% bottle, 4.1 for three, and 0.9 for one 8% bottle. The ticket button is present on the dashboard and both tools.
+- Completed: The live form created intake-only website-feedback #146 with the alcohol-calculators App ID, standard-drinks area, TroyFowlerMD assignment, source label, and submitter/approval labels. Closed the explicitly identified intake-only test after verification. No production change requested by that test.
+- Completed: Central npm run check and npm run audit:fleet passed (all 13 page checks); live API preflight accepted the registered origin (204), rejected an unregistered origin (403), and rejected an unregistered App ID (400). Calculator npm run check, npm test (12/12), npm run build, node scripts/check-jfk-pwa-cache.mjs, and git diff --check passed.
+- Blockers/notes: GitHub notification email receipt was not independently inspected. Source changes and production behavior are verified; no remaining implementation blockers.
