@@ -128,3 +128,9 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: Updated the ARS short-term goal to t+21, added hospital course guidance and the .jfkpsyhospitalcourse template, clarified when the JFK Epic EMTALA Transfer consent applies, and corrected the .JFKCRISISRESOURCELIST SmartPhrase.
 - In progress: Publish through GitHub Pages and verify the four workflow items live before closing the feedback issues.
 - Blockers/notes: Each issue included an exact page area and an automated acknowledgment. No screenshots were attached.
+
+### 2026-11-10 - ChatGPT Work - JFK workflow publication receipt
+- Completed: Merged PR #40 as 9e4e4cbc1b19ae53801311efa813dc422b8773b3. GitHub Pages deployment https://github.com/TroyFowlerMD/clinical-dashboards/actions/runs/42823983662 succeeded.
+- Completed: Confirmed all four cards in Chrome on the public dashboard and the authenticated IT Mode host using fresh navigation URLs. Both SmartPhrase buttons reported the exact copied text. The production Pages HTML matched the merged file byte for byte.
+- Completed: Closed website-feedback #150–153 as completed after live verification. Local git diff --check and the JFK PWA cache guard passed. The cache guard also passed for the PR and the merge commit.
+- Blockers/notes: None. DECISIONS.md unchanged because the edits clarify existing local workflow instructions.

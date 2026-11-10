@@ -7,7 +7,7 @@
 - [!] Blocked - include reason in parentheses
 
 ## Active Tasks
-- [~] Publish and live-verify JFK workflow requests #150–153 before closing the feedback issues.
+- [x] Published and live-verified JFK workflow requests #150–153 via PR #40. Closed all four after verifying both live hosts.
 - [x] Published and live-verified alcohol calculator IT requests and Johny Bootlegger directory defaults (clinical-dashboards PR #38; website-feedback PR #145; intake-only test #146 verified and closed).
 - [~] Resolve website-feedback #137: make protected JFK IT Mode enter automatically after Cloudflare Access authentication, without depending on the redirect preserving `?it_mode=1`.
 - [x] Published and live-verified website-feedback #136: every nested workflow item now expands automatically when its main workflow card opens.
