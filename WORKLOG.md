@@ -123,3 +123,8 @@ This file records completed Codex work sessions for Clinical Dashboards. Append 
 - Completed: The live form created intake-only website-feedback #146 with the alcohol-calculators App ID, standard-drinks area, TroyFowlerMD assignment, source label, and submitter/approval labels. Closed the explicitly identified intake-only test after verification. No production change requested by that test.
 - Completed: Central npm run check and npm run audit:fleet passed (all 13 page checks); live API preflight accepted the registered origin (204), rejected an unregistered origin (403), and rejected an unregistered App ID (400). Calculator npm run check, npm test (12/12), npm run build, node scripts/check-jfk-pwa-cache.mjs, and git diff --check passed.
 - Blockers/notes: GitHub notification email receipt was not independently inspected. Source changes and production behavior are verified; no remaining implementation blockers.
+
+### 2026-11-10 - ChatGPT Work - JFK workflow requests #150–153
+- Completed: Updated the ARS short-term goal to t+21, added hospital course guidance and the .jfkpsyhospitalcourse template, clarified when the JFK Epic EMTALA Transfer consent applies, and corrected the .JFKCRISISRESOURCELIST SmartPhrase.
+- In progress: Publish through GitHub Pages and verify the four workflow items live before closing the feedback issues.
+- Blockers/notes: Each issue included an exact page area and an automated acknowledgment. No screenshots were attached.
