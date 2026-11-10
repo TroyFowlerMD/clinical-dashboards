@@ -857,7 +857,7 @@
                 <p>Select Add Care Plan (unless one already exists). Add a plan for each problem requiring active management. IP Substance Use should apply to every patient.</p>
                 <ul>
                   <li>Add at least one <strong>Long-term goal</strong> — choose from list or use <span class="sp" onclick="copySP(this)">.JFKPSYLTG</span>. End date: "t+365"</li>
-                  <li>Add at least one <strong>Short-term goal</strong> — choose from list or use <span class="sp" onclick="copySP(this)">.JFKPSYSTG</span>. End date: "t+7" (ACU) or "t+14" (ARS)</li>
+                  <li>Add at least one <strong>Short-term goal</strong> — choose from list or use <span class="sp" onclick="copySP(this)">.JFKPSYSTG</span>. End date: "t+7" (ACU) or "t+21" (ARS)</li>
                   <li>Add at least one <strong>Intervention</strong> per STG — choose from list or use <span class="sp" onclick="copySP(this)">.JFKPSYINT</span>. Select a measurable frequency (not "as needed"). <strong>ACU frequency: Daily. ARS frequency: Weekly.</strong></li>
                   <li>Set the effective date 30 days out so the care plan does not expire</li>
                   <li>Select Plans → Start a New Plan → Multidisciplinary Treatment Plan</li>
@@ -888,6 +888,7 @@
               </div>
               <div class="wf-item-body">
                 <p>Update Handoff and Hospital Course (both in Sidebar). SmartPhrases: <span class="sp" onclick="copySP(this)">.JFKHANDOFF</span> and <span class="sp" onclick="copySP(this)">.JFKHOSPITALCOURSE</span></p>
+                <p>Multiple hospital course formats are fine. Use <span class="sp" onclick="copySP(this)">.jfkpsyhospitalcourse</span> for a simple template, or start with the initial assessment. Keep a running narrative of pertinent changes in medications and behavior, and document complications as they occur.</p>
               </div>
             </div>
           </div>
@@ -1190,7 +1191,8 @@
                 <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="wf-item-body">
-                <p>Consents → search "EMTALA Transfer" → complete consent with the patient</p>
+                <p><strong>Complete the EMTALA Transfer consent only when there is an EMTALA emergency medical condition requiring transfer.</strong> In Epic, go to Consents → search "EMTALA Transfer" → complete consent with the patient.</p>
+                <p>If there is no EMTALA emergency medical condition, use the Outpatient Note Template to document the evaluation.</p>
               </div>
             </div>
           </div>
@@ -1216,7 +1218,7 @@
                 <svg class="wf-item-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
               <div class="wf-item-body">
-                <p>Discharge tab → Admission Denial → Instructions for AVS → add SmartPhrase: <span class="sp" onclick="copySP(this)">JFKCRISISRESOURCELIST</span>. At the top of that section, include personalized follow-up recommendations.</p>
+                <p>Discharge tab → Admission Denial → Instructions for AVS → add SmartPhrase: <span class="sp" onclick="copySP(this)">.JFKCRISISRESOURCELIST</span>. At the top of that section, include personalized follow-up recommendations.</p>
                 <p><strong>Do NOT place a discharge order</strong> — the patient was never admitted. Nursing removes the patient from the facility in Bed Manager.</p>
               </div>
             </div>
